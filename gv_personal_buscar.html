@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Ventas</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+
+<body>
+    <div id="contenedor">
+        <div id="cabecera">
+            CABECERA
+        </div>
+
+        <div id="menu">
+            MENU
+            <table>
+                <tbody>
+                    <tr>
+                       <th>Paginas</th> 
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                                    <li>
+                                        <a href="gv_personal_buscar.html">Buscar</a>
+                                    </li>
+                                    <li>
+                                        <a href="gv_personal_principal.html">Principal</a>
+                                    </li>
+                             
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div id="contenido">
+            CONTENIDO
+            <form>
+                <h3>
+                    Formulario de Búsqueda Vendedor
+                </h3>
+                
+                <fieldset>
+                    <legend>Datos de Búsqueda </legend>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Código</td>
+                                <td>Nombre</td>
+                                <td>Documento</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text"; name="codigo">
+                                </td>
+                                <td>
+                                    <input type="text"; name="nombre">
+                                </td>
+                                <td>
+                                    <input type="text"; name="documento">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                                
+                </fieldset>
+                <br>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="submit"; name="buscar" value="Buscar">
+                            </td>
+                            <td>
+                                <input type="submit"; name="limpiar" value="Limpiar" class="button">   
+                            </td>
+                        </tr>
+                     </tbody>
+                </table>
+                <br>
+            </form>
+            </table>
+    
+        </div>
+
+        <div id="pie">
+            PIE
+        </div>
+    </div>
+</body>
+
+</html>
