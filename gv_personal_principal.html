@@ -21,7 +21,7 @@
             <table>
                 <tbody>
                     <tr>
-                       <th>Paginas</th> 
+                        <th>Paginas</th>
                     </tr>
                     <tr>
                         <td>
@@ -42,16 +42,17 @@
             CONTENIDO
             <form>
                 <h3>
-                    Formulario de Vendedor
+                    Formulario de Personal
                 </h3>
-                
+
                 <fieldset>
                     <legend>Datos Básicos </legend>
                     <table>
                         <tbody>
                             <tr>
                                 <td>Código</td>
-                                <td>Nombre</td>
+                                <td>Nombre Completo</td>
+                                <td>Tipo Documento</td>
                                 <td>Documento</td>
                             </tr>
                             <tr>
@@ -59,54 +60,133 @@
                                     <span></span>
                                 </td>
                                 <td>
-                                    <input type="text"; name="nombre">
+                                    <input type="text" ; name="nombre">
                                 </td>
                                 <td>
-                                    <input type="text"; name="documento">
+                                    <select name="tipo_documento">
+                                        <option value="0">Cédula de ciudadanía</option>
+                                        <option value="1">Cédula de extranjería</option>
+                                        <option value="2">Tarjeta de identidad</option>
+                                        <option value="3">Pasaporte</option>
+                                        <option value="4">Número de Identificación</option>
+                                    </select>
                                 </td>
-                                <tr>
-                                    <td>Ciudad</td>
-                                    <td>E-mail</td>
-                                    <td>Fecha de nacimiento</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text"; name="ciudad">
-                                    </td>
-                                    <td>
-                                        <input type="text"; name="email">
-                                    </td>
-                                    <td>
-                                        <input type="date" name="f_nacimiento">
-                                    </td>
-                                </tr>
+                                <td>
+                                    <input type="text" ; name="documento">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Genero</td>
+                                <td>Fecha de Nacimiento</td>
+                                <td>Lugar Nacimiento</td>
+                                <td>E-mail</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="genero">
+                                        <option value="0">Hombre</option>
+                                        <option value="1">Mujer</option>
+
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="date" name="f_nacimiento">
+                                </td>
+                                <td>
+                                    <select name="lugar_p">
+                                        <option value="0">Escoja Pais</option>
+
+                                    </select>
+
+                                    <select name="lugar_d">
+                                        <option value="0">Escoja Departamento</option>
+
+                                    </select>
+                                    <select name="lugar_c">
+                                        <option value="0">Escoja Ciudad</option>
+
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" ; name="email">
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Fecha Ingreso</td>
+                                <td>Dirección</td>
+                                <td>Ubicacion Dirección</td>
+                                <td>Teléfono</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" name="f_ingreso">
+                                </td>
+                                <td>
+                                    <input type="text" ; name="direccion">
+                                </td>
+                                <td>
+                                    <select name="ubicacion_d">
+                                        <option value="0">Escoja Departamento</option>
+
+                                    </select>
+                                    <select name="ubicacion_c">
+                                        <option value="0">Escoja Ciudad</option>
+
+                                    </select>
+                                </td>
+
+                                <td>
+
+                                    <select name="tipo_telefono">
+                                        <option value="0">Celular</option>
+                                        <option value="1">Fijo</option>
+                                    </select>
+                                    <input type="text" ; name="telefono">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Area</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="area">
+                                        <option value="0">Contabilidad</option>
+                                        <option value="1">Ventas</option>
+                                        <option value="1">Administrativa</option>
+                                    </select>
+                                </td>
                             </tr>
                         </tbody>
-                    </table>                                
+                    </table>
                 </fieldset>
                 <br>
                 <table>
                     <tbody>
                         <tr>
                             <td>
-                                <input type="submit"; name="grabar" value="Grabar">
+                                <input type="submit" ; name="grabar" value="Grabar">
                             </td>
                             <td>
-                                <input type="submit"; name="crear" value="Crear Nuevo">
+                                <input type="submit" ; name="crear" value="Crear Nuevo">
                             </td>
                             <td>
-                                <input type="submit"; name="limpiar" value="Limpiar" class="button">   
+                                <input type="submit" ; name="limpiar" value="Limpiar" class="button">
                             </td>
                             <td>
-                                <input type="submit"; name="buscar" value="Buscar" class="button">   
+                                <input type="submit" ; name="buscar" value="Buscar" class="button">
                             </td>
                         </tr>
-                     </tbody>
+                    </tbody>
                 </table>
                 <br>
             </form>
             </table>
-    
+
         </div>
 
         <div id="pie">
