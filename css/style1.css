@@ -57,28 +57,52 @@ body {
     height: 100%;
     width: 20%;
     float: left;
+    margin-top: 2px;
 }
 .menu-contenedor {
     margin: 0;
     padding: 0;
     list-style: none;
     font-size: 0;
+    height: 200px;
 }
 .menu-item {
-    font-size: 15px;
-    padding-top: 10px;
+    font-size: 13px;
+    padding-top: 5px;
 }
 .menu-link { 
-    height: 40px;
+    height: 30px;
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
     text-transform: uppercase;
-    line-height: 40px;
+    line-height: 30px;
     color: cornsilk;
     text-decoration: none;
     font-weight: 700;
 }
 .menu-link:hover {
     background-color: rgba(0,0,0,0.3);
+    width: 100%;
+}
+.contenedor-formulario {
+    margin-top: 2px;
+    margin-left: 2px;
+    margin-right: auto;
+    height: 200px;
+    width: 79.8%;
+    background-color: rgba(175, 174, 174, 0.548);
+    float: left;
+}
+.formulario {
+    margin-top: 7px;
+}
+.contenedor-id {
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.contenedor-nombre {
+    float: left;
+    margin-right: 5px;
 }

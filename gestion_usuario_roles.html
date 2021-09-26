@@ -40,7 +40,7 @@
     </header>
     <!--Definición de estilo para cabecera, se realizará en css-->
     <section>
-        <div class="menu"> MENU
+        <div class="menu">
             <nav class="menu-nav">
                 <ul class="menu-contenedor">
                     <li class="menu-item">
@@ -55,28 +55,40 @@
                 </ul>
             </nav>
         </div>
-        <div class="contenido">
-            <form action="" class="contenido">
-                <div>
-                    <label class="nombre">Nombre</label>
+        <div class="contenedor-formulario">
+            <form action="" class="formulario">
+                <div class="contenedor-id">
+                    <div>
+                        <label class="identificacion">Número de Identificación</label>
+                    </div>
+                    <div>
+                        <input type="text" ; name="identificacion">
+                    </div>
                 </div>
-                <div>
-                    <input type="text"; name="Codigo">
+                <div class="contenedor-nombre">
+                    <div>
+                        <label class="nombre">Nombre</label>
+                    </div>
+                    <div>
+                        <input type="text" ; name="Codigo">
+                    </div>
                 </div>
-                <div>
-                    <label class="nombre">Apellidos</label>
-                </div>
-                <div>
-                    <input type="text" ; name="Codigo">
+                <div class="contenedor-apellido">
+                    <div>
+                        <label class="apellido">Apellidos</label>
+                    </div>
+                    <div>
+                        <input type="text" ; name="Codigo">
+                    </div>
                 </div>
             </form>
         </div>  
-    </section>
-    <section>
-        <div class="pie">
-            PIE
-        </div>
-    </section>  
+    </section> 
+    
 </body>
+<div class="pie">
+    PIE
+</div>
+    
 
 </html>
