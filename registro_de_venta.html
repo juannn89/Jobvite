@@ -36,61 +36,71 @@
             </nav>
         </div>
     </header>
-    <!--Definición de estilo para cabecera, se realizará en css-->
+    <!--Definición menú izquierdo-->
     <section>
         <div class="menu">
             <nav class="menu-nav">
                 <ul class="menu-contenedor">
                     <li class="menu-item">
-                        <a href="#" class="menu-link">VENTA</a>
+                        <a href="registro_de_venta.html" class="menu-link">VENTA</a>
                     </li>
                     <li class="menu-item">
-                        <a href="#" class="menu-link">Consulta</a>
+                        <a href="busquedaVentas.html" class="menu-link">Consulta</a>
                     </li>
                     <li class="menu-item">
-                        <a href="#" class="menu-link">Registro de usuario</a>
+                        <a href="#" class="menu-link">modificación</a>
                     </li>
                 </ul>
             </nav>
         </div>
-        <div class="contenedor-formulario">
+        <!--Definición del contenido página-->
+        <div class="contenedor-formulario"> 
             <form action=""; method="post"; target="_blank">
                 <div class="buscar-por-cliente">
-                    <p>
-                        Buscar por cliente: 
+                    <p class="contenedor-busqueda">
+                        Ingrese ID de cliente: 
                         <br>
                         <input type="search" ; name="identificacion">
                         <input type="submit"; value="buscar">
                     </p>
                 </div>
-                <div class="buscar-por-venta">
-                    <p>
-                        Buscar por venta:
+                <br><br><br><br>
+                <div> 
+                    Si el usuario aparece registrado continuar con venta, sino llenar campos y click en registrar
+                </div>
+                <input type="submit" ; value="Registrar">
+                <br><br>
+                <div class="buscar-por-cliente">
+                    <p class="contenedor-busqueda">
+                        Ingrese ID producto:
                         <br>
                         <input type="search" ; name="identificacion">
                         <input type="submit" ; value="buscar">
                     </p>
                 </div>
-            </form>
-            <form action="" class="formulario">
-                <div class="contenedor-nombre">
-                    <div>
-                        <label class="nombre">Id cliente</label>
-                    </div>
-                    <div>
-                        <input type="text"; name="Codigo"; value="1039687498">
-                    </div>
+                <br><br><br><br>
+                <div>
+                    Seleccione el producto, cantidad y registre su venta 
+                </div> <br>
+                cantidad <br>
+                <input type="search" ; name="identificacion"> <br><br>
+                <input type="submit" ; value="Registrar">
+                <!-- <div class="buscar-por-cliente">
+                    <p class="contenedor-busqueda">
+                        Buscar por nombre de cliente:
+                        <br>
+                        <input type="search" ; name="identificacion">
+                        <input type="submit" ; value="buscar">
+                    </p>
                 </div>
-                <br>
-                <div class="contenedor-apellido">
-                    <div>
-                        <label class="apellido">Apellidos</label>
-                    </div>
-                    <div>
-                        <input type="text" ; name="Codigo">
-                    </div>
-                </div>
-            </form>
+                <div class="buscar-por-venta">
+                    <p class="contenedor-busqueda">
+                        Buscar por venta:
+                        <br>
+                        <input type="search" ; name="identificacion">
+                        <input type="submit" ; value="buscar">
+                    </p>
+                </div> -->
         </div>  
     </section> 
     

@@ -1,12 +1,15 @@
 .buscar-por-cliente {
     border: 3px blueviolet solid;
-    margin: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     float: left;
 }
 .buscar-por-venta {
     border: 3px blueviolet solid;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 5px;
     float: left;
+}
+.contenedor-busqueda { 
+    margin: 5px;
 }
