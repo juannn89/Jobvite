@@ -31,7 +31,7 @@
                         <a href="#" class="cabecera-menu-link">producto</a>
                     </li>
                     <li class="cabecera-menu-item">
-                        <a href="#" class="cabecera-menu-link">Usuarios</a>
+                        <a href="usuario_principal.html" class="cabecera-menu-link">Usuarios</a>
                     </li>
                     <li class="cabecera-menu-item">
                         <a href="#" class="cabecera-menu-link">Contacto</a>
@@ -54,57 +54,100 @@
                 </ul>
             </nav>
         </div>
+    </section>
         <!--Definición del contenido página-->
-        <div class="contenedor-formulario"> 
-            <form action=""; method="post"; target="_blank">
+    <div class="contenedor-formulario">
+        <form class="formulario-venta" action="" ; method="post" ; target="_blank">
+            <fieldset class="buscar-por-cliente">
+                <legend class="titulo-consulta-ventas">
+                    registro de ventas (cliente)
+                </legend>
                 <div class="buscar-por-cliente">
-                    <p class="contenedor-busqueda">
-                        Ingrese ID de cliente: 
-                        <br>
-                        <input type="search" ; name="identificacion">
-                        <input type="submit"; value="buscar">
-                    </p>
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarCliente">
+                                Número de indentificación
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarCliente" type="search" name="identificacion">
+                    </div>
                 </div>
-                <br><br><br><br>
-                <div> 
-                    Si el usuario aparece registrado continuar con venta, sino llenar campos y click en registrar
-                </div>
-                <input type="submit" ; value="Registrar">
-                <br><br>
                 <div class="buscar-por-cliente">
-                    <p class="contenedor-busqueda">
-                        Ingrese ID producto:
-                        <br>
-                        <input type="search" ; name="identificacion">
-                        <input type="submit" ; value="buscar">
-                    </p>
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarClienteN">
+                                Nombre
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarClienteN" type="search" name="identificacion">
+                    </div>
                 </div>
-                <br><br><br><br>
-                <div>
-                    Seleccione el producto, cantidad y registre su venta 
+                <div class="buscar-por-cliente">
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarIdVenta">
+                                Apellido
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarIdVenta" type="search" name="identificacion">
+                    </div>
+                </div>
+            </fieldset>
+            <div class="botonBuscar">
+                <input type="submit" ; value="buscar">
+            </div>
+        </form>
+        <form class="formulario-venta" action="" ; method="post" ; target="_blank">
+            <fieldset class="buscar-por-cliente">
+                <legend class="titulo-consulta-ventas">
+                    registro de ventas (producto)
+                </legend>
+                <div class="buscar-por-cliente">
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarCliente">
+                                ID producto
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarCliente" type="search" name="identificacion">
+                    </div>
+                </div>
+                <div class="buscar-por-cliente">
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarClienteN">
+                                Nombre producto
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarClienteN" type="search" name="identificacion">
+                    </div>
+                </div>
+                <div class="buscar-por-cliente">
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarIdVenta">
+                                Modelo
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarIdVenta" type="search" name="identificacion">
+                    </div>
                 </div> <br>
-                cantidad <br>
-                <input type="search" ; name="identificacion"> <br><br>
-                <input type="submit" ; value="Registrar">
-                <!-- <div class="buscar-por-cliente">
-                    <p class="contenedor-busqueda">
-                        Buscar por nombre de cliente:
-                        <br>
-                        <input type="search" ; name="identificacion">
-                        <input type="submit" ; value="buscar">
-                    </p>
+                <div class="buscar-por-cliente">
+                    <div class="contenedor-busqueda">
+                        <div class="buscarVenta">
+                            <label for="buscarIdVenta">
+                                Costo
+                            </label>
+                        </div>
+                        <input class="contenedorInput1" id="buscarIdVenta" type="search" name="identificacion">
+                    </div>
                 </div>
-                <div class="buscar-por-venta">
-                    <p class="contenedor-busqueda">
-                        Buscar por venta:
-                        <br>
-                        <input type="search" ; name="identificacion">
-                        <input type="submit" ; value="buscar">
-                    </p>
-                </div> -->
-        </div>  
-    </section> 
-    
+            </fieldset>
+            <div class="botonBuscar">
+                <input type="submit" ; value="buscar">
+            </div>
+        </form>
+    </div>
 </body>
 <div class="pie">
     PIE

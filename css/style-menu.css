@@ -61,6 +61,7 @@ body {
     flex-direction: row;
     margin-left: 1.5px;
     margin-right: 1.5px;
+    margin-top: 1.5px;
 }
 .menu-contenedor {
     margin: 0;
