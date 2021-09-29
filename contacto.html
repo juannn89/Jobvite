@@ -8,7 +8,7 @@
     <title>Gestión Ventas</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style-menu.css">
-    <link rel="stylesheet" href="css/style-venta.css">
+    <link rel="stylesheet" href="css/style-producto.css">
 </head>
 
 
@@ -29,7 +29,7 @@
                     </li>
                     <li class="cabecera-menu-item">
                         <a href="producto_buscar.html" class="cabecera-menu-link">producto</a>  
-                    </li>                      
+                    </li>                  
                     <li class="cabecera-menu-item">
                         <a href="usuario_buscar.html" class="cabecera-menu-link">Usuarios</a>
                     </li>
@@ -41,51 +41,40 @@
         </div>
     </header>
 
-    <!--Definición menú izquierdo-->
-    <section>
-        <div class="menu">
-            <nav class="menu-nav">
-                <ul class="menu-contenedor">
-                    <li class="menu-item">
-                        <a href="usuario_buscar.html" class="menu-link">BUSQUEDA USUARIO</a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="usuario_principal.html" class="menu-link">REGISTRO USUARIO</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
         <!--Definición del contenido página-->
         <div class="contenedor-formulario">
             <form action=""; method="post"; target="_blank">
                 <h3>
-                    Formulario de Búsqueda Usuario
+                    CONTACTE CON NOSOTROS
                 </h3>
                 
-                <fieldset class="buscar-por-cliente">
-                    <legend>Datos de Búsqueda </legend>
+                <fieldset class="">
+                    
                     <table>
                         <tbody>
                             <tr>
-                                <td>Código</td>
+
                                 <td>Nombre</td>
-                                <td>Documento</td>
-                                <td>E-mail</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="text"; name="codigo_">
-                                </td>
                                 <td>
                                     <input type="text"; name="nombre">
-                                </td>
+                                </td>     
+
+                                <td>Correo electronico</td>
                                 <td>
-                                    <input type="text"; name="documento">
-                                </td>
+                                    <input type="text"; name="correo">
+                                </td>  
+
+                                <td>Asunto</td>
                                 <td>
-                                    <input type="text"; name="email">
+                                    <input type="text"; name="asunto">
                                 </td>
+
+                                <td>Mensaje</td>
+                                <td>
+                                    <input type="text"; name="mensaje">
+                                </td>                                                          
                             </tr>
+
                         </tbody>
                     </table>                                
                 </fieldset>
@@ -94,11 +83,9 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input type="submit"; name="buscar" value="Buscar">
+                                <input type="submit"; name="enviar" value="Enviar">
                             </td>
-                            <td>
-                                <input type="submit"; name="limpiar" value="Limpiar" class="button">   
-                            </td>
+
                         </tr>
                      </tbody>
                 </table>

@@ -8,7 +8,7 @@
     <title>Gestión Ventas</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style-menu.css">
-    <link rel="stylesheet" href="css/style-venta.css">
+    <link rel="stylesheet" href="css/style-producto.css">
 </head>
 
 
@@ -29,7 +29,7 @@
                     </li>
                     <li class="cabecera-menu-item">
                         <a href="producto_buscar.html" class="cabecera-menu-link">producto</a>  
-                    </li>                      
+                    </li>                         
                     <li class="cabecera-menu-item">
                         <a href="usuario_buscar.html" class="cabecera-menu-link">Usuarios</a>
                     </li>
@@ -47,10 +47,10 @@
             <nav class="menu-nav">
                 <ul class="menu-contenedor">
                     <li class="menu-item">
-                        <a href="usuario_buscar.html" class="menu-link">BUSQUEDA USUARIO</a>
+                        <a href="producto_buscar.html" class="menu-link">BUSQUEDA USUARIO</a>
                     </li>
                     <li class="menu-item">
-                        <a href="usuario_principal.html" class="menu-link">REGISTRO USUARIO</a>
+                        <a href="producto_registrar.html" class="menu-link">REGISTRO USUARIO</a>
                     </li>
                 </ul>
             </nav>
@@ -59,55 +59,77 @@
         <div class="contenedor-formulario">
             <form action=""; method="post"; target="_blank">
                 <h3>
-                    Formulario de Búsqueda Usuario
+                    Formulario de Resgistro de Producto
                 </h3>
-                
-                <fieldset class="buscar-por-cliente">
-                    <legend>Datos de Búsqueda </legend>
+
+                <fieldset class="buscar-producto">
+                    <legend>Datos de Registro </legend>
                     <table>
                         <tbody>
                             <tr>
-                                <td>Código</td>
-                                <td>Nombre</td>
-                                <td>Documento</td>
-                                <td>E-mail</td>
-                            </tr>
+                                <td>Id</td>
+                                <td>Nombre del producto</td>
+                                <td>Modelo</td>
+                            </tr>                           
                             <tr>
                                 <td>
-                                    <input type="text"; name="codigo_">
+                                    <span></span>
                                 </td>
                                 <td>
-                                    <input type="text"; name="nombre">
+                                    <input type="text" ; name="nombre">
                                 </td>
                                 <td>
-                                    <input type="text"; name="documento">
+                                    <input type="text" ; name="modelo">
                                 </td>
-                                <td>
-                                    <input type="text"; name="email">
-                                </td>
+                            </tr>         
+                            <tr>
+                                    <td>Valor unitario</td>
+                                    <td>Cantidad</td>
+                                    <td>Descripcion</td>
                             </tr>
+                                <td>
+                                    <input type="text" ; name="valor">
+                                </td>
+                                <td>
+                                    <input type="text" ; name="cantidad">
+                                </td>
+                                <td>
+                                    <input type="text" ; name="descripcion">
+                                </td>
+                            </tr>                           
                         </tbody>
-                    </table>                                
+                    </table>
                 </fieldset>
                 <br>
                 <table>
                     <tbody>
                         <tr>
                             <td>
-                                <input type="submit"; name="buscar" value="Buscar">
+                                <input type="submit" ; name="grabar" value="Grabar">
                             </td>
                             <td>
-                                <input type="submit"; name="limpiar" value="Limpiar" class="button">   
+                                <input type="submit" ; name="actualizar" value="Actualizar">
+                            </td>
+                            <td>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </td>
+                            <td>
+                                <input type="submit" ; name="crear" value="Crear Nuevo">
+                            </td>
+                            <td>
+                                <input type="submit" ; name="limpiar" value="Limpiar" class="button">
+                            </td>
+                            <td>
+                                <input type="submit" ; name="buscar" value="Buscar" class="button">
                             </td>
                         </tr>
-                     </tbody>
+                    </tbody>
                 </table>
                 <br>
             </form>
             </table>
-    
+
         </div>
-    </section>
 
         <div id="pie">
             PIE
