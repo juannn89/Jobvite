@@ -8,7 +8,7 @@
     <title>Gestión Ventas</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style-menu.css">
-    <link rel="stylesheet" href="css/style-venta.css">
+    <link rel="stylesheet" href="css/style-producto.css">
 </head>
 
 
@@ -28,10 +28,10 @@
                         <a href="registro_de_venta.html" class="cabecera-menu-link">Ventas</a>
                     </li>
                     <li class="cabecera-menu-item">
-                        <a href="#" class="cabecera-menu-link">producto</a>
-                    </li>
+                        <a href="producto_buscar.html" class="cabecera-menu-link">producto</a>  
+                    </li>                  
                     <li class="cabecera-menu-item">
-                        <a href="usuario_principal.html" class="cabecera-menu-link">Usuarios</a>
+                        <a href="usuario_buscar.html" class="cabecera-menu-link">Usuarios</a>
                     </li>
                     <li class="cabecera-menu-item">
                         <a href="contacto.html" class="cabecera-menu-link">Contacto</a>
@@ -47,10 +47,10 @@
             <nav class="menu-nav">
                 <ul class="menu-contenedor">
                     <li class="menu-item">
-                        <a href="usuario_buscar.html" class="menu-link">BUSQUEDA USUARIO</a>
+                        <a href="producto_buscar.html" class="menu-link">BUSQUEDA PRODUCTO</a>
                     </li>
                     <li class="menu-item">
-                        <a href="usuario_principal.html" class="menu-link">REGISTRO USUARIO</a>
+                        <a href="producto_registrar.html" class="menu-link">REGISTRO PRODUCTO</a>
                     </li>
                 </ul>
             </nav>
@@ -59,31 +59,23 @@
         <div class="contenedor-formulario">
             <form action=""; method="post"; target="_blank">
                 <h3>
-                    Formulario de Búsqueda Usuario
+                    Formulario de Búsqueda del Producto
                 </h3>
                 
-                <fieldset class="buscar-por-cliente">
+                <fieldset class="buscar-producto">
                     <legend>Datos de Búsqueda </legend>
                     <table>
                         <tbody>
                             <tr>
-                                <td>Código</td>
+                                <td>Id</td>
                                 <td>Nombre</td>
-                                <td>Documento</td>
-                                <td>E-mail</td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text"; name="codigo_">
+                                    <input type="text"; name="codigo">
                                 </td>
                                 <td>
                                     <input type="text"; name="nombre">
-                                </td>
-                                <td>
-                                    <input type="text"; name="documento">
-                                </td>
-                                <td>
-                                    <input type="text"; name="email">
                                 </td>
                             </tr>
                         </tbody>
