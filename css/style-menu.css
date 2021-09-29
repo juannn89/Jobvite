@@ -3,7 +3,7 @@
 }
 body {
     font-family: sans-serif;
-    color: #333333
+    color: #333333;
 }
 
 /* espacio para definir estilos de cabecera*/
@@ -90,34 +90,6 @@ body {
 .menu-link:hover {
     background-color: rgba(0,0,0,0.3);
     width: 100%;
-}
-.contenedor-formulario {
-    display: inline-block;
-    margin: 1.5px;
-    height: 500px;
-    width: auto;
-    background-color: rgba(175, 174, 174, 0.548);
-    display: flex; 
-    flex-direction: row;
-    
-}
-.formulario {
-    margin-top: 7px;
-}
-.contenedor-id {
-    float: left;
-    margin-right: 5px;
-    margin-left: 5px;
-}
-.contenedor-nombre {
-    float: left;
-    margin-right: 5px;
-    margin-left: 5px;
-}
-.contenedor-apellido {
-    float: left;
-    margin-right: 5px;
-    margin-left: 5px;
 }
 .pie {
     float: left;
