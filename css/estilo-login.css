@@ -50,6 +50,11 @@
     color: white;
     margin-bottom: 16px;
   }
+  .buttons:hover {
+    background-color: rgba(11, 10, 85, 0.801);
+    width: 100%;
+    cursor: pointer;
+  }
   
   .form-login p{
     height: 40px;
