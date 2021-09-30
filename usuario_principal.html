@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style-menu.css">
     <link rel="stylesheet" href="css/style-venta.css">
+    <link rel="stylesheet" href="css/style-busqueda-venta.css">
 </head>
 
 
@@ -21,28 +22,25 @@
             </div>
             <nav class="cabecera-menu">
                 <ul class="cabecera-menu-contenedor">
-                    <ul class="cabecera-menu-contenedor">
-                        <li class="cabecera-menu-item">
-                            <a href="inicio.html" class="cabecera-menu-link">Inicio</a>
-                        </li>
-                        <li class="cabecera-menu-item">
-                            <a href="registro_de_venta.html" class="cabecera-menu-link">Ventas</a>
-                        </li>
-                        <li class="cabecera-menu-item">
-                            <a href="#" class="cabecera-menu-link">producto</a>
-                        </li>
-                        <li class="cabecera-menu-item">
-                            <a href="usuario_principal.html" class="cabecera-menu-link">Usuarios</a>
-                        </li>
-                        <li class="cabecera-menu-item">
-                            <a href="#" class="cabecera-menu-link">Contacto</a>
-                        </li>
-                    </ul>
+                    <li class="cabecera-menu-item">
+                        <a href="inicio.html" class="cabecera-menu-link">Inicio</a>
+                    </li>
+                    <li class="cabecera-menu-item">
+                        <a href="registro_de_venta.html" class="cabecera-menu-link">Ventas</a>
+                    </li>
+                    <li class="cabecera-menu-item">
+                        <a href="producto_buscar.html" class="cabecera-menu-link">producto</a>  
+                    </li>      
+                    <li class="cabecera-menu-item">
+                        <a href="usuario_principal.html" class="cabecera-menu-link">Usuarios</a>
+                    </li>
+                    <li class="cabecera-menu-item">
+                        <a href="contacto.html" class="cabecera-menu-link">Contacto</a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <!--Definición menú izquierdo-->
     <section>
         <div class="menu">
@@ -59,7 +57,7 @@
         </div>
         <!--Definición del contenido página-->
         <div class="contenedor-formulario">
-            <form action=""; method="post"; target="_blank">
+            <form class="formulario-venta" action=""; method="post"; target="_blank">
                 <h3>
                     Formulario de Registro Usuario
                 </h3>
@@ -91,7 +89,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" ; name="documento">
+                                    <input type="number" ; name="documento">
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +101,7 @@
                             <tr>
                                 
                                 <td>
-                                    <input type="text" ; name="email">
+                                    <input type="email" ; name="email">
                                 </td>
                                 <td>
 
@@ -111,7 +109,7 @@
                                         <option value="0">Celular</option>
                                         <option value="1">Fijo</option>
                                     </select>
-                                    <input type="text" ; name="telefono">
+                                    <input type="number" ; name="telefono">
                                 </td>
                                 <td>
                                     <select name="roles">
