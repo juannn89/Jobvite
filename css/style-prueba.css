@@ -62,3 +62,23 @@ body {
     text-decoration: underline;
     text-align: justify;
 }
+
+.texto {
+    text-align: center;
+}
+
+.tabla-busqueda {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.tabla-busqueda td, tr {
+    border: solid black 1px;
+    padding: 5px;
+}
+
+thead {
+    text-transform: uppercase;
+    font-weight: 700;
+}
