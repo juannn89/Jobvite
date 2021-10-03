@@ -1,0 +1,53 @@
+.formulario{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:10px;
+}
+
+
+.contenedor-formulario {
+    margin: 1.5px;
+    height: 500px;
+    width: auto;
+    background-color: rgba(175, 174, 174, 0.548);
+    display: flex;
+    flex-flow: column;
+}
+
+.formulario-sombra {
+    background-color: rgba(77, 77, 77, 0.192);
+    white-space: normal;
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+
+}
+
+.formulario-producto {
+    margin-left: auto;
+    margin-right: auto;
+    display:inline-block;
+    margin: 10px;
+}
+
+
+
+.titulo{
+    color: rgb(8, 8, 8);
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.contenedorInput1 { 
+    width: 280px;
+    height: 30px;
+}
+
+.botonBuscar {
+    float:right;
+    margin-left: 10px;
+}
+
+
+

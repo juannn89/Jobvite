@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style-menu.css">
     <link rel="stylesheet" href="css/style-producto.css">
-    <link rel="stylesheet" href="css/style-busqueda-venta.css">
+
+    <script src="javascript/app.js"></script>
 </head>
 
 
@@ -56,81 +57,81 @@
                 </ul>
             </nav>
         </div>
-        <!--Definición del contenido página-->
-        <div class="contenedor-formulario">
-            <form class="formulario-venta" action=""; method="post"; target="_blank">
-                <h3>
-                    Formulario de Resgistro de Producto
-                </h3>
+    </section>
 
-                <fieldset class="buscar-producto">
-                    <legend class="titulo-consulta-ventas">Datos de Registro </legend>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Id</td>
-                                <td>Nombre del producto</td>
-                                <td>Modelo</td>
-                            </tr>                           
-                            <tr>
-                                <td>
-                                    <span></span>
-                                </td>
-                                <td>
-                                    <input type="text" ; name="nombre">
-                                </td>
-                                <td>
-                                    <input type="text" ; name="modelo">
-                                </td>
-                            </tr>         
-                            <tr>
-                                    <td>Valor unitario</td>
-                                    <td>Cantidad</td>
-                                    <td>Descripcion</td>
-                            </tr>
-                                <td>
-                                    <input type="text" ; name="valor">
-                                </td>
-                                <td>
-                                    <input type="text" ; name="cantidad">
-                                </td>
-                                <td>
-                                    <input type="text" ; name="descripcion">
-                                </td>
-                            </tr>                           
-                        </tbody>
-                    </table>
+    <!--Definición del contenido página-->
+        <div class="contenedor-formulario">
+            <form id="formulario-producto" class="formulario-sombra" action="">
+                <h3> Formulario de Resgistro de Producto</h3>
+                <fieldset class="formulario">
+                    <legend class="titulo">Datos de Registro </legend>
+
+                    <div class="formulario-producto" id="producto-codigo">
+                        <label for="producto-codigo" >Codigo del producto</label>
+                        <div>
+                            <input type="search" name="producto-codigo" id="producto-codigo" class="contenedorInput1" >   
+                        </div>                   
+                    </div>
+
+                    <div class="formulario-producto" id="producto-nombre">
+                        <label for="producto-nombre" >Nombre del producto</label>
+                        <div>
+                            <input type="search" name="producto-nombre" id="producto-nombre" class="contenedorInput1" >   
+                        </div>                   
+                    </div>
+
+                    <div class="formulario-producto" id="producto-modelo">
+                        <label for="producto-modelo" >Modelo</label>
+                        <div>
+                            <input type="search"; name="producto-modelo" id="producto-modelo" class="contenedorInput1" >
+                        </div>
+                    </div>
+
+                    <div class="formulario-producto" id="producto-valor">
+                        <label for="producto-valor" >Valor unitario</label>
+                        <div>     
+                            <input type="search"; name="producto-valor" id="producto-valor" class="contenedorInput1" >
+                        </div>
+                    </div>
+
+                    <div class="formulario-producto" id="producto-cantidad">
+                        <label for="producto-cantidad" >Cantidad</label>
+                        <div>
+                            <input type="search"; name="producto-cantidad" id="producto-cantidad" class="contenedorInput1">
+                        </div>  
+                    </div>
+
+                    <div class="formulario-producto" id="producto-descripcion">
+                        <label for="producto-descripcion" >Descripcion</label>
+                        <div>
+                            <input type="search"; name="producto-descripcion" id="producto-descripcion" class="contenedorInput1" >
+                        </div>
+                    </div>
+
                 </fieldset>
-                <br>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="submit" ; name="grabar" value="Grabar">
-                            </td>
-                            <td>
-                                <input type="submit" ; name="actualizar" value="Actualizar">
-                            </td>
-                            <td>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            </td>
-                            <td>
-                                <input type="submit" ; name="crear" value="Crear Nuevo">
-                            </td>
-                            <td>
-                                <input type="submit" ; name="limpiar" value="Limpiar" class="button">
-                            </td>
-                            <td>
-                                <input type="submit" ; name="buscar" value="Buscar" class="button">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-            </form>
-            </table>
+
+                <input type="submit" onclick="alert('El producto se ha guardado correctamente !')" value="Guardar"> 
+                <input type="submit" value="Crear nuevo"> 
+                <input type="submit" value="Limpiar"> 
+
+
+                <input type="submit" class="botonBuscar" value="Buscar">          
+                <input type="submit" class="botonBuscar" value="Actualizar" > 
+
+                
+
 
         </div>
+
+
+
+
+
+
+
+
+
+
 
         <div id="pie">
             PIE
