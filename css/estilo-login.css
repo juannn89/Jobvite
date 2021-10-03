@@ -71,3 +71,20 @@
   .form-login a:hover {
     text-decoration: underline;
   }
+
+  .ingreso-gmail {
+    
+    width: 100px;
+    padding: 5px;
+  }
+
+  .contenedor-gmail {
+    text-align: center;
+    background: #04506e;
+  }
+
+  .contenedor-gmail:hover {
+    background-color: rgba(11, 10, 85, 0.801);
+    width: 100%;
+    cursor: pointer;
+  }
