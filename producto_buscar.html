@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style-menu.css">
     <link rel="stylesheet" href="css/style-producto.css">
-    <link rel="stylesheet" href="css/style-busqueda-venta.css">
+
+    
 </head>
 
 
@@ -56,56 +57,41 @@
                 </ul>
             </nav>
         </div>
-        <!--Definición del contenido página-->
-        <div class="contenedor-formulario">
-            <form class="formulario-venta" action=""; method="post"; target="_blank">
-                <h3>
-                    Formulario de Búsqueda del Producto
-                </h3>
-                
-                <fieldset class="buscar-producto">
-                    <legend class="titulo-consulta-ventas">Datos de Búsqueda </legend>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Id</td>
-                                <td>Nombre</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="text"; name="codigo">
-                                </td>
-                                <td>
-                                    <input type="text"; name="nombre">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>                                
-                </fieldset>
-                <br>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="submit"; name="buscar" value="Buscar">
-                            </td>
-                            <td>
-                                <input type="submit"; name="limpiar" value="Limpiar" class="button">   
-                            </td>
-                        </tr>
-                     </tbody>
-                </table>
-                <br>
-            </form>
-            </table>
-    
-        </div>
     </section>
 
-        <div id="pie">
-            PIE
-        </div>
+    <!--Definición del contenido página-->
+    <div class="contenedor-formulario">
+            <form id="formulario-producto-buscar" class="formulario-sombra" action="">
+                <h3>Formulario de Búsqueda del Producto</h3>
+                
+                <fieldset class="formulario-buscar">
+                    <legend class="titulo">Datos de Búsqueda </legend>
+
+
+                    <div class="formulario-producto" id="producto-codigo">
+                        <label for="producto-codigo" >Codigo del producto</label>
+                        <div>
+                            <input type="search" name="producto-codigo" id="producto-codigo" class="contenedorInput1" >   
+                        </div>                   
+                    </div>
+
+                    <div class="formulario-producto" id="producto-nombre">
+                        <label for="producto-nombre" >Nombre del producto</label>
+                        <div>
+                            <input type="search" name="producto-nombre" id="producto-nombre" class="contenedorInput1" >   
+                        </div>                   
+                    </div>
+                </fieldset>
+
+                <input type="submit" class="botonBuscar2" value="Buscar">  
+
+    </div>
     
+
+    <div id="pie">
+            PIE
+    </div>
+    <script src="js/app-producto.js"></script> 
 </body>
 
 </html>

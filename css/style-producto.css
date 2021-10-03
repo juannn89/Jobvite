@@ -1,9 +1,14 @@
-.formulario{
+.formulario-buscar{
+    display:grid;
+    grid-template-columns: 1fr 1fr ;
+    gap:10px;
+}
+
+.formulario-registrar{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap:10px;
 }
-
 
 .contenedor-formulario {
     margin: 1.5px;
@@ -49,5 +54,8 @@
     margin-left: 10px;
 }
 
-
+.botonBuscar2 {
+    margin:auto;
+    display: flex;  
+}
 
