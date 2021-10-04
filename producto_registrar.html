@@ -66,57 +66,57 @@
                 <fieldset class="formulario-registrar">
                     <legend class="titulo">Datos de Registro </legend>
 
-                    <div class="formulario-producto" id="producto-codigo">
+                    <div class="formulario-producto" id="">
                         <label for="producto-codigo" >Codigo del producto</label>
                         <div>
-                            <input type="search" name="producto-codigo" id="producto-codigo" class="contenedorInput1" >   
+                            <input type="text" name="producto-codigo" id="producto-codigo" class="contenedorInput1" >   
                         </div>                   
                     </div>
 
-                    <div class="formulario-producto" id="producto-nombre">
+                    <div class="formulario-producto" id="">
                         <label for="producto-nombre" >Nombre del producto</label>
                         <div>
-                            <input type="search" name="producto-nombre" id="producto-nombre" class="contenedorInput1" >   
+                            <input type="text" name="producto-nombre" id="producto-nombre" class="contenedorInput1" >   
                         </div>                   
                     </div>
 
-                    <div class="formulario-producto" id="producto-modelo">
+                    <div class="formulario-producto" id="">
                         <label for="producto-modelo" >Modelo</label>
                         <div>
-                            <input type="search"; name="producto-modelo" id="producto-modelo" class="contenedorInput1" >
+                            <input type="text"; name="producto-modelo" id="producto-modelo" class="contenedorInput1" >
                         </div>
                     </div>
 
-                    <div class="formulario-producto" id="producto-valor">
+                    <div class="formulario-producto" id="">
                         <label for="producto-valor" >Valor unitario</label>
                         <div>     
-                            <input type="search"; name="producto-valor" id="producto-valor" class="contenedorInput1" >
+                            <input type="number"; name="producto-valor" id="producto-valor" class="contenedorInput1" >
                         </div>
                     </div>
 
-                    <div class="formulario-producto" id="producto-cantidad">
+                    <div class="formulario-producto" id="">
                         <label for="producto-cantidad" >Cantidad</label>
                         <div>
-                            <input type="search"; name="producto-cantidad" id="producto-cantidad" class="contenedorInput1">
+                            <input type="number"; name="producto-cantidad" id="producto-cantidad" class="contenedorInput1">
                         </div>  
                     </div>
 
-                    <div class="formulario-producto" id="producto-descripcion">
+                    <div class="formulario-producto" id="">
                         <label for="producto-descripcion" >Descripcion</label>
                         <div>
-                            <input type="search"; name="producto-descripcion" id="producto-descripcion" class="contenedorInput1" >
+                            <input type="text"; name="producto-descripcion" id="producto-descripcion" class="contenedorInput1" >
                         </div>
                     </div>
 
                 </fieldset>
 
-                <input type="submit" onclick="alert('El producto se ha guardado correctamente !')" value="Guardar"> 
-                <input type="submit" value="Crear nuevo"> 
-                <input type="submit" value="Limpiar"> 
+                <input type="button" onclick="guardar()" value="Guardar"> 
+                <input type="button" onclick="limpiar()" value="Crear nuevo"> 
+                <input type="button" onclick="limpiar()" value="Limpiar"> 
 
 
-                <input type="submit" class="botonBuscar" value="Buscar">          
-                <input type="submit" class="botonBuscar" value="Actualizar" > 
+                <input type="button" onclick="location.href='/producto_buscar.html';"  class="botonBuscar" value="Buscar / Actualizar">          
+               
 
                 
 

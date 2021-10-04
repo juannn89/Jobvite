@@ -59,3 +59,11 @@
     display: flex;  
 }
 
+.btn{
+    text-decoration: none;
+    color: rgb(10, 10, 10);
+    background: aliceblue;
+    padding: 4px;
+    border: rgb(105, 105, 105) 1px solid;
+    border-radius: 7%;
+}
