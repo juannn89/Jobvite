@@ -3,13 +3,18 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
-  body {
-    font-family: arial;
-    background-image: url(../img/Login.jpg);
-    background-size:cover;
+
+  .container{
+    background-image: url(img/login.jpg);
+    padding-top: 1rem;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
   }
-  
+
   .form-login {
     width: 400px;
     height: 340px;
@@ -73,7 +78,6 @@
   }
 
   .ingreso-gmail {
-    
     width: 100px;
     padding: 5px;
   }
