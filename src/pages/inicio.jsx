@@ -1,21 +1,14 @@
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
-import {Link} from 'react-router-dom'
+import SidebarInicio from 'components/Sidebar-inicio';
+
 
 function Inicio(){
     return (
             <>
 
-                <Navbar />
-                <div className="menu">
-                        <nav className="menu-nav">
-                            <ul className="menu-contenedor">
-                                <li className="menu-item">
-                                    <Link to ="/" className="menu-link">cerrar sesión</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                </div>   
+                <Navbar />           
+                <SidebarInicio />                
                 <div className="contenedor-formulario">
                     <p>
                         Bienvenido (a) señor usuario a su aplicativo web de gestión de ventas.

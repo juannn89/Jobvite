@@ -6,7 +6,7 @@
 
 .contenedor-formulario {
     margin: 1.5px;
-    height: 500px;
+    height: 100vh;
     width: auto;
     background-color: rgba(175, 174, 174, 0.548);
     display: flex;
