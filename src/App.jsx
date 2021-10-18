@@ -1,10 +1,8 @@
 
 import Login from 'pages/login';
 import Inicio from 'pages/inicio';
-import VentasRegistrar from 'pages/ventas-registrar';
-import VentasBuscar from 'pages/ventas-buscar';
-import ProductosBuscar from 'pages/productos-buscar';
-import ProductosRegistrar from 'pages/productos-registrar';
+import Ventas from 'pages/ventas';
+import Producto from 'pages/productos';
 import UsuariosBuscar from 'pages/usuarios-buscar';
 import UsuariosRegistrar from 'pages/usuarios-registrar';
 
@@ -26,25 +24,17 @@ function App() {
     <div>
       <Router>
         <Switch>
-
+    
           <Route path='/inicio'> 
             <Inicio />
           </Route>
 
-          <Route path='/ventas-registrar'> 
-            <VentasRegistrar />
+          <Route path='/ventas'> 
+            <Ventas />
           </Route>
 
-          <Route path='/ventas-buscar'> 
-            <VentasBuscar />
-          </Route>
-
-          <Route path='/productos-buscar'> 
-            <ProductosBuscar />
-          </Route>
-
-          <Route path='/productos-registrar'> 
-            <ProductosRegistrar />
+          <Route path='/productos'> 
+            <Producto />
           </Route>
 
           <Route path='/usuarios-buscar'> 

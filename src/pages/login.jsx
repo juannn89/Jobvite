@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import gmailLogo from 'img/gmail.png'
 
 
-function Login(){
+const Login=()=>{
     return (
         <div className="container">
                 <section className="form-login">

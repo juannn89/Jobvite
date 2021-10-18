@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 
-function UsuariosRegistrar(){
+const UsuariosRegistrar=()=>{
 
     const form=useRef(null);
 

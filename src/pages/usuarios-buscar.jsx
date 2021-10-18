@@ -2,7 +2,7 @@ import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 import SidebarUsuarios from 'components/Sidebar-usuarios';
 
-function UsuariosBuscar(){
+const UsuariosBuscar=()=>{
     return (
         <>
 
