@@ -22,7 +22,7 @@ const Navbar=()=>{
                             <Link to="/productos" className="cabecera-menu-link">producto</Link>  
                         </li>  
                         <li className="cabecera-menu-item">
-                            <Link to="/usuarios-buscar" className="cabecera-menu-link">Usuarios</Link>
+                            <Link to="/usuarios" className="cabecera-menu-link">Usuarios</Link>
                         </li>
                     </ul>
                 </nav>

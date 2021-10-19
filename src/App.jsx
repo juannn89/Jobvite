@@ -3,8 +3,8 @@ import Login from 'pages/login';
 import Inicio from 'pages/inicio';
 import Ventas from 'pages/ventas';
 import Producto from 'pages/productos';
-import UsuariosBuscar from 'pages/usuarios-buscar';
-import UsuariosRegistrar from 'pages/usuarios-registrar';
+import Usuarios from 'pages/usuarios';
+
 
 
 
@@ -37,12 +37,8 @@ function App() {
             <Producto />
           </Route>
 
-          <Route path='/usuarios-buscar'> 
-            <UsuariosBuscar />
-          </Route>
-
-          <Route path='/usuarios-registrar'> 
-            <UsuariosRegistrar />
+          <Route path='/usuarios'> 
+            <Usuarios />
           </Route>
 
           <Route path='/'> 

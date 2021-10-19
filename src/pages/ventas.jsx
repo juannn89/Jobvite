@@ -160,7 +160,7 @@ const TablaVentas = ({ listaVentas,setMostrarTabla}) => {
 
     return(   
         <div className='flex flex-col items-center justify-center'>
-            <h2 className='text-2xl font-extrabold mb-10'>Todos los Ventas </h2>
+            <h2 className='text-2xl font-extrabold mb-10'>Todos las Ventas </h2>
             <table className='tabla'>
                 <thead>
                     <tr>
