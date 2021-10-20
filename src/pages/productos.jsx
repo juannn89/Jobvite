@@ -6,35 +6,40 @@ import axios from 'axios'
 import {nanoid} from 'nanoid'
 
 
-
-
 const Producto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [productos, setProductos] = useState([]);
     const [textoBoton, setTextoBoton] = useState('Crear Nuevo Producto');
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
     useEffect(()=>{
-        //obtener lista de productos desde el backend
-        if (mostrarTabla){
+        const obtenerProductos= async()=>{
             const options = { method: 'GET', url: 'http://localhost:5000/productos'};
-            axios.request(options).then(function (response){
+            await axios.request(options).then(function (response){
                 setProductos(response.data);
             })
             .catch(function (error){
                 console.error(error);
             });        
+        };
+
+        if (ejecutarConsulta){
+            obtenerProductos();
+            setEjecutarConsulta(false);
+        }
+    },[ejecutarConsulta]);
+
+
+    useEffect(()=>{
+        //obtener lista de productos desde el backend
+        if (mostrarTabla){
+            setTextoBoton('Registrar Producto');
+            setEjecutarConsulta(true);
+        } else{
+            setTextoBoton('Listar Productos')
         }
     },[mostrarTabla]);
 
-    useEffect(() => {
-        if (mostrarTabla) {
-            setTextoBoton('Registrar Producto');
-            
-        } else {
-            setTextoBoton('Listar Productos');
-        
-        }
-        }, [mostrarTabla]); 
 
     return (
         <div className='h-full min-h-screen bg-blue-50 w-full flex-col'>
@@ -55,7 +60,7 @@ const Producto = () => {
                     {mostrarTabla ? (
                         <TablaProductos 
                         listaProductos={productos} 
-                        setMostrarTabla={setMostrarTabla}/>
+                        setEjecutarConsulta={setEjecutarConsulta}/>
                     ) : (
                         <FormularioCreacionProductos
                         setMostrarTabla={setMostrarTabla}
@@ -70,9 +75,8 @@ const Producto = () => {
 }
 
 //Pagina para registrar los productos
-const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProductos})=>{
-    const form = useRef(null);
-    
+const FormularioCreacionProductos=({setMostrarTabla})=>{
+        const form = useRef(null);
         const submitForm = async(e) => {
             e.preventDefault(); //para que el form pida que datos faltan
             const fd = new FormData(form.current);
@@ -83,15 +87,18 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
             });
 
             const options={
-                method:'Post',
+                method:'POST',
                 url:'http://localhost:5000/productos/nuevo',
                 headers:{'Content-Type':'application/json'},
-                data:{codigo:nuevoProducto.codigo,nombre:nuevoProducto.nombre,valor:nuevoProducto.valor,estado:nuevoProducto.estado},
+                data:{
+                    codigo:      nuevoProducto.codigo,
+                    nombre:      nuevoProducto.nombre,
+                    valor:       nuevoProducto.valor,
+                    estado:      nuevoProducto.estado
+                },
             };
 
-            await axios
-                .request(options)
-                .then(function (response){
+            await axios.request(options).then(function (response){
                     console.log(response.data);
                     toast.success("Producto agregado con exito");
                 })
@@ -99,9 +106,9 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
                     console.error(error);
                     toast.error("Error al crear producto");
                 });
-
-
+                
             setMostrarTabla(true);   //true: dirige hacia la tabla al agregar un product, false: no mueve
+
             
         };
         return(
@@ -143,8 +150,99 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
     )
 }
 
+const FilaProductos =({productos,setEjecutarConsulta})=>{
+    const [edit, setEdit]=useState(false);
+    const [infoNuevoProducto,setInfoNuevoProducto]=useState({
+        codigo:      productos.codigo,
+        nombre:      productos.nombre,
+        valor:       productos.valor,
+        estado:      productos.estado
+    });
+    const actualizarProducto = async()=>{
+        console.log(infoNuevoProducto);
+        //enviar informacion al backend
+        const options={
+            method:'PATCH',
+            url:'http://localhost:5000/productos/editar',
+            headers:{'Content-Type':'application/json'},
+            data:{...infoNuevoProducto,id: productos._id},
+        };
+
+        await axios.request(options).then(function (response){
+            console.log(response.data);
+            toast.success("Producto modificado con exito");
+            setEdit(false);
+            setEjecutarConsulta(true);
+        })
+        .catch(function(error){
+            console.error(error);
+            toast.error("Error al modificar producto");
+        });
+    }
+
+
+    const eliminarProducto=async()=>{
+        const options={
+            method:'DELATE',
+            url:'http://localhost:5000/productos/eliminar',
+            headers:{'Content-Type':'application/json'},
+            data:{id: productos._id},
+        };
+
+        await axios
+        .request(options)
+        .then(function (response){
+            console.log(response.data);
+            toast.success("Producto eliminado con exito");
+            setEjecutarConsulta(true)
+        })
+        .catch(function(error){
+            console.error(error);
+            toast.error("Error al eliminar producto");
+        });
+    }
+
+    return (     
+        <tr>
+            {edit?(
+                <>
+                    <td><input className='bg-gray-50 border border-gray-600 p-1 rounded-lg m-1' type="text" value={infoNuevoProducto.codigo} onChange={(e)=>setInfoNuevoProducto({...infoNuevoProducto, codigo: e.target.value})}  /></td>
+                    <td><input className='bg-gray-50 border border-gray-600 p-1 rounded-lg m-1' type="text" value={infoNuevoProducto.nombre} onChange={(e)=>setInfoNuevoProducto({...infoNuevoProducto,  nombre: e.target.value})} /></td>
+                    <td><input className='bg-gray-50 border border-gray-600 p-1 rounded-lg m-1' type="text" value={infoNuevoProducto.valor} onChange={(e)=>setInfoNuevoProducto({...infoNuevoProducto, valor: e.target.value})} /></td>
+                    <td><input className='bg-gray-50 border border-gray-600 p-1 rounded-lg m-1' type="text" value={infoNuevoProducto.estado} onChange={(e)=>setInfoNuevoProducto({...infoNuevoProducto,  estado: e.target.value})} /></td>
+                </>
+                ):(
+                <>
+                    <td>{productos.codigo}</td>
+                    <td>{productos.nombre} </td>
+                    <td>{productos.valor}</td>
+                    <td>{productos.estado}</td>
+
+                </> 
+            )}
+            <td>
+                <div className='flex w-full justify-around'>
+                    {edit?(
+                        <i onClick={()=>actualizarProducto()} className='fas fa-check text green-700 hover:text-green-500' />
+                        ):(
+                        <i onClick={()=>setEdit(!edit)} className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500' />
+                        )}
+
+                    <i onClick={()=>eliminarProducto() } className='fas fa-trash text-red-700 hover:text-red-500' />
+                </div>
+            </td>
+        </tr>
+    )
+
+
+}
+
 //Pagina para mostrar productos
-const TablaProductos = ({listaProductos, setMostrarTabla}) => {
+const TablaProductos = ({listaProductos,setEjecutarConsulta}) => {
+    useEffect(()=>{
+        console.log('este es el listado de productos en el componente tabla',listaProductos);
+    },[listaProductos]);
+
 
     return(   
         <div className='flex flex-col items-center justify-center'>
@@ -160,21 +258,8 @@ const TablaProductos = ({listaProductos, setMostrarTabla}) => {
                     </tr> 
                 </thead>
                 <tbody>
-                    {listaProductos.map((producto)=>{
-                        return(
-                            <tr key={nanoid()}>
-                                <td>{producto.codigo}</td>
-                                <td>{producto.nombre} </td>
-                                <td>{producto.valor}</td>
-                                <td>{producto.estado}</td>
-                                <td>
-                                    <div className='flex w-full justify-around'>
-                                        <i className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500' />
-                                        <i className='fas fa-trash text-red-700 hover:text-red-500' />
-                                    </div>
-                                </td>
-                            </tr>
-                            )
+                    {listaProductos.map((productos)=>{
+                        return <FilaProductos key={nanoid()} productos={productos} setEjecutarConsulta={setEjecutarConsulta} />;
                         })
                     }
                 </tbody>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Navbar from 'components/Navbar';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
 import {nanoid} from 'nanoid'
 
