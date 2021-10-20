@@ -25,6 +25,7 @@ const Producto = () => {
 
         if (ejecutarConsulta){
             obtenerProductos();
+
             setEjecutarConsulta(false);
         }
     },[ejecutarConsulta]);
@@ -183,7 +184,7 @@ const FilaProductos =({productos,setEjecutarConsulta})=>{
 
     const eliminarProducto=async()=>{
         const options={
-            method:'DELATE',
+            method:'DELETE',
             url:'http://localhost:5000/productos/eliminar',
             headers:{'Content-Type':'application/json'},
             data:{id: productos._id},

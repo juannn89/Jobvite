@@ -17,9 +17,9 @@ export const obtenerProductos = async (setProductos) => {
 
 //post
 
-//path
+//patch
 
-//delate
+//delete
 
 
 
@@ -32,9 +32,9 @@ export const obtenerProductos = async (setProductos) => {
 
 //post
 
-//path
+//patch
 
-//delate
+//delete
 
 
 
@@ -49,6 +49,6 @@ export const obtenerProductos = async (setProductos) => {
 
 //post
 
-//path
+//patch
 
-//delate
+//delete
