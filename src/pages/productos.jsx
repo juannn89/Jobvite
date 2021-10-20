@@ -16,9 +16,9 @@ const Producto = () => {
     useEffect(()=>{
         //obtener lista de productos desde el backend
         if (mostrarTabla){
-            const options = { method: 'GET', url: 'http://localhost:5000/productos/'};
+            const options = { method: 'GET', url: 'http://localhost:5000/productos'};
             axios.request(options).then(function (response){
-                console.log(response.data);
+                setProductos(response.data);
             })
             .catch(function (error){
                 console.error(error);
@@ -71,7 +71,8 @@ const Producto = () => {
 
 //Pagina para registrar los productos
 const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProductos})=>{
-        const form = useRef(null);
+    const form = useRef(null);
+    
         const submitForm = async(e) => {
             e.preventDefault(); //para que el form pida que datos faltan
             const fd = new FormData(form.current);
@@ -83,7 +84,7 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
 
             const options={
                 method:'Post',
-                url:'http://localhost:5000/productos/',
+                url:'http://localhost:5000/productos/nuevo',
                 headers:{'Content-Type':'application/json'},
                 data:{codigo:nuevoProducto.codigo,nombre:nuevoProducto.nombre,valor:nuevoProducto.valor,estado:nuevoProducto.estado},
             };
@@ -128,7 +129,9 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
                     </label>        
 
 
-                    <button type='submit' className='bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white '> Guardar </button>
+                    <button type='submit' className='bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white '>
+                        Guardar Producto
+                    </button>
    
                 </form>  
                 <ToastContainer
@@ -141,7 +144,7 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
 }
 
 //Pagina para mostrar productos
-const TablaProductos = ({ listaProductos,setMostrarTabla}) => {
+const TablaProductos = ({listaProductos, setMostrarTabla}) => {
 
     return(   
         <div className='flex flex-col items-center justify-center'>
