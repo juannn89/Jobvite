@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from 'components/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios'
+import Axios from 'axios'
 import {nanoid} from 'nanoid'
 
 
