@@ -84,7 +84,7 @@ const FormularioCreacionProductos=({setMostrarTabla, listaProductos, setProducto
 
             const options={
                 method:'Post',
-                url:'http://localhost:5000/productos/nuevo',
+                url:'http://localhost:5000/productos',
                 headers:{'Content-Type':'application/json'},
                 data:{codigo:nuevoProducto.codigo,nombre:nuevoProducto.nombre,valor:nuevoProducto.valor,estado:nuevoProducto.estado},
             };
