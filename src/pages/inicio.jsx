@@ -1,5 +1,4 @@
 import Navbar from 'components/Navbar';
-import Footer from 'components/Footer';
 import SidebarInicio from 'components/Sidebar-inicio';
 
 
@@ -14,10 +13,7 @@ const Inicio=()=>{
                         Bienvenido (a) señor usuario a su aplicativo web de gestión de ventas.
                     </p>
                 </div>              
-                <Footer />
-
-            </>
-                
+            </>           
     )
 }
 
