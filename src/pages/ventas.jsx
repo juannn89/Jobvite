@@ -1,10 +1,120 @@
+import React, { useEffect, useState, useRef } from 'react';
 import Navbar from 'components/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
-import React, {useEffect,useState, useRef} from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import {nanoid} from 'nanoid'
+import { nanoid } from 'nanoid'
+import { obtenerUsuarios, obtenerProductos, crearVenta } from 'utils/api';
 
-const ventasBackend  =[
+
+const Ventas = () => {
+    const form = useRef(null);
+    const [vendedores, setvendedores] = useState([]);
+    const [productos, setProductos] = useState([]);
+    const [productosSelect, setProductosSelect] = useState([]);
+
+    useEffect(() => {
+        const obtenerVendedores = async () => {
+            await obtenerUsuarios(
+                (response) => {
+                    setvendedores(response.data)
+                },
+                (error) => {
+                    console.error(error);
+                }
+            );
+        };
+        const definirProductos = async () => {
+            await obtenerProductos(
+                (response) => {
+                    setProductos(response.data);
+                },
+                (error) => {
+                    console.error(error);
+                });
+        }
+
+        definirProductos();
+        obtenerVendedores();
+    }, []);
+    
+    useEffect(() => {
+        console.log('productos seleccionados', productosSelect);
+    }, [productosSelect]);
+
+    const agregrarProducto = () => {
+        setProductosSelect([...productosSelect, DropDownProductos]);
+    }
+
+    const submitForm = async (e) => {
+        e.preventDefault(); //para que el form pida que datos faltan
+        const fd = new FormData(form.current);
+        const nuevaVenta = {};
+        fd.forEach((value, key) => {
+            nuevaVenta[key] = value;
+        });
+    
+    const infoConsolidado = {
+        valor: nuevaVenta.valor,
+        vendedor: vendedores.filter((v) => v._id === nuevaVenta.vendedor)[0],
+        producto: productos.filter((v) => v._id === nuevaVenta.producto)[0],
+        };
+        await crearVenta(infoConsolidado,
+            (response) => {
+                console.log(response);
+             },
+            (error) => {
+                console.error(error);
+            }
+        );
+    };
+    return (
+        <div className='h-full min-h-screen bg-blue-50 w-full flex-col'>
+            <Navbar />
+            <h2 className=' flex flex-col items-center text-3xl font-extrabold text-gray-900 m-6 mb-10'>Pagina de administracion de ventas</h2>
+            <form ref={form} onSubmit={submitForm} className='min-h-screen flex flex-col items-center'>
+                <label className='flex flex-col my-3'>
+                    <span className='font-bold'>Vendedor</span>
+                    <select name="vendedor" className='p-2' defaultValue={-1}>
+                        <option disabled value={-1}>Seleccione un vendedor</option>
+                        {vendedores.map((el) => {
+                            return <option key={nanoid()} value ={el._id}>{`${el.nombre} ${el.apellido}`}</option>;
+                        })}
+                    </select>
+                </label>
+                <div className='flex flex-col'>
+                    <span>Selección de productos</span>
+                    <button onClick={() => agregrarProducto()} className='h-10 self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2'>Agregar otro producto</button>
+                </div>
+                {
+                    productosSelect.map((V) => {
+                        return <V productos={productos} />;
+                    })
+                }
+                <label className='flex flex-col my-3'>
+                    <span className='font-bold'>Valor total venta</span>
+                    <input className='bg-gray-150 border-gray-600 p-2' required type="number" name='valor'/>
+                </label>
+                <button className='h-10 self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2' type='submit'>Registrar Venta</button>
+            </form>
+        </div>
+    );
+};
+
+const DropDownProductos = ({ productos }) => {
+    return (
+        <label className='flex flex-col'>
+            <span className='font-bold'>Producto</span>
+            <select name="producto" className='p-2' defaultValue={-1}>
+                <option disabled value={-1}>Seleccione un producto</option>
+                {productos.map((el) => {
+                    return <option key={nanoid()} value={el._id}> {`${el.nombre} ${el.codigo}`}</option>;
+                })}
+            </select>
+        </label>
+    );
+};
+    
+/* const ventasBackend  =[
     {
         identificacionVendedor:1140888888,
         nombreVendedor:"Lucas corredor",
@@ -196,8 +306,6 @@ const TablaVentas = ({ listaVentas,setMostrarTabla}) => {
             </table>
         </div> 
         )
-}
+} */
 
-
-
-export default Ventas ;    
+export default Ventas ;  
