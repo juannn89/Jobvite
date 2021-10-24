@@ -6,6 +6,7 @@ import { obtenerProductos, crearProducto, editarProducto, borrarProducto } from 
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from 'components/Navbar';
 import ReactLoading from 'react-loading';
+import PrivateComponent from 'components/PrivateComponent';
 
 const Producto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -215,6 +216,7 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
 
                 </> 
             )}
+            <PrivateComponent roleList = {['admin']}>
             <td>
                 <div className='flex w-full justify-around'>
                     {edit?(
@@ -226,6 +228,7 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
                     <i onClick={()=>eliminarProducto() } className='fas fa-trash text-red-700 hover:text-red-500' />
                 </div>
             </td>
+            </PrivateComponent>
         </tr>
     )
 
@@ -250,7 +253,9 @@ const TablaProductos = ({loading, listaProductos,setEjecutarConsulta}) => {
                         <th>Nombre del producto</th>
                         <th>Valor unitario </th>
                         <th>Estado </th>
+                        <PrivateComponent roleList = {['admin']}>
                         <th>Acciones </th>
+                        </PrivateComponent>
                     </tr> 
                 </thead>
                 <tbody>

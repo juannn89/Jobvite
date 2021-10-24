@@ -11,19 +11,25 @@ import 'styles/style-pestañas.css';
 import 'styles/normalize.css';
 import { Auth0Provider } from '@auth0/auth0-react';
 import PrivateRoute from 'components/PrivateRoute';
+import { UserContext } from 'context/userContext';
+import { useState } from 'react';
 
 
 
 
 function App() {
+  const [userData, setUserData] = useState({});
+
   return (
+    
     <Auth0Provider
       domain="jobvite.us.auth0.com"
       clientId="B0d49EzpBQ49WiGPZD1ppSMemSPxNYbB"
       redirectUri='http://localhost:3000/inicio'
       audience='api-auth-jobvite'
     >
-    <div>
+      <div>
+        <UserContext.Provider value={{ userData, setUserData}}>
       <PrivateRoute>
         <Router>
         <Switch>
@@ -51,6 +57,7 @@ function App() {
         </Switch>  
         </Router>
       </PrivateRoute>
+      </UserContext.Provider>
       </div>
     </Auth0Provider>
   );
