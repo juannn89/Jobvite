@@ -21,26 +21,39 @@ const Usuarios = () => {
         fetchUsuarios();
     }, []);
     return (
-        <div>
-            <Navbar />
+        <>
+        <Navbar />
+        <div className=' flex flex-col justify-center items-center'>
+            
             admin usuarios
 
             <table className='tabla'>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Estado</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {usuarios.map(user => {
                         return (
                             <tr key={nanoid()}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
+                                <td> <EstadoUsuario user={user} /> </td>
                                 <td>
                                     <RolesUsuario user={user} />
                                 </td>
+                                
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
         </div>
+        </>
     );
 };
 
@@ -60,12 +73,37 @@ const RolesUsuario = ({ user }) => {
         } 
     }, [rol, user]);
     return (
-        <select value={rol} onChange={(e)=>setRol(e.target.value)}>
+        <select value={rol} onChange={(e) => setRol(e.target.value)}>
+            <option value="" disabled>Seleccione rol</option>
             <option value="admin">Admin</option>
             <option value="vendedor">Vendedor</option>
-            <option value="inactivo">Inactivo</option>
+            <option value="sin rol">Sin rol</option>
         </select>
     );
+};
+
+const EstadoUsuario = ({ user }) => {
+    const [estado, setEstado] = useState(user.estado ?? '');
+    useEffect(() => {
+        const editUsuario = async () => {
+            await editarUsuario(user._id, { estado }, (response) => {
+                console.log(response);
+            },
+                (err) => {
+                    console.err(err);
+                });
+        };
+        if (user.estado !== estado); {
+            editUsuario();
+        }
+    }, [estado, user]);
+    return <select value={estado} onChange={(e) => setEstado(e.target.value)}>
+        <option value="" disabled>Seleccione un estado</option>
+        <option value="autorizado">Autorizado</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="rechazado">Rechazado</option>
+
+        </select>
 };
 
 export default Usuarios;

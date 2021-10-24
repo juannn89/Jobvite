@@ -1,17 +1,24 @@
 import Navbar from 'components/Navbar';
-import SidebarInicio from 'components/Sidebar-inicio';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
-const Inicio=()=>{
+const Inicio = () => {
+    const { logout } = useAuth0();
+
+    const cerrarSesion = () => {
+        logout({ returnTo: 'http://localhost:3000/' });
+        localStorage.setItem('token', null);
+    };
+
     return (
             <>
 
                 <Navbar />           
-                <SidebarInicio />                
                 <div className="contenedor-formulario">
                     <p>
                         Bienvenido (a) señor usuario a su aplicativo web de gestión de ventas.
-                    </p>
+                </p>
+                <button onClick={() => cerrarSesion()}>Cerrar Sesión</button>
                 </div>              
             </>           
     )

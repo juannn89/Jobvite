@@ -25,18 +25,14 @@ function App() {
     <Auth0Provider
       domain="jobvite.us.auth0.com"
       clientId="B0d49EzpBQ49WiGPZD1ppSMemSPxNYbB"
-      redirectUri='http://localhost:3000/inicio'
+      redirectUri='http://localhost:3000/'
       audience='api-auth-jobvite'
     >
       <div>
         <UserContext.Provider value={{ userData, setUserData}}>
-      <PrivateRoute>
+        
         <Router>
         <Switch>
-          
-          <Route path='/inicio'>
-            <Inicio />
-          </Route>
             
           <Route path='/ventas'>
               <Ventas />
@@ -47,16 +43,18 @@ function App() {
           </Route>
 
           <Route path='/usuarios'> 
+                <PrivateRoute roleList={[ 'admin', 'vendedor']}>
               <Usuarios />
+            </PrivateRoute>
           </Route>
           
           <Route path='/'> 
-              <Login />
+              <Inicio />
           </Route>
 
         </Switch>  
         </Router>
-      </PrivateRoute>
+      
       </UserContext.Provider>
       </div>
     </Auth0Provider>

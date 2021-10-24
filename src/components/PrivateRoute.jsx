@@ -1,43 +1,19 @@
-import React, { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Link } from 'react-router-dom';
-import ReactLoading from 'react-loading';
-import { obtenerDatosUsuario } from 'utils/api';
 import { useUser } from 'context/userContext';
+import React from 'react';
+import Navbar from './Navbar';
 
-const PrivateRoute = ({ children }) => {
-    const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0();
-    const { setUserData } = useUser();
-
-    useEffect(() => {
-        const fetchAuth0Token = async () => {
-            const accessToken = await getAccessTokenSilently({
-                audience: `api-auth-jobvite`,
-            });
-            localStorage.setItem('token', accessToken);
-            await obtenerDatosUsuario(
-                (response) => {
-                    console.log("response", response);
-                    setUserData(response.data);
-                },
-                (err) => {
-                    console.log('err', err); 
-                });
-        };
-        if (isAuthenticated) {
-            fetchAuth0Token();
-        }
-    }, [isAuthenticated, getAccessTokenSilently]);
-
-    if (isLoading)
-        return <ReactLoading type='cylon' color='#222333' height={660} width={700} />;
+const PrivateRoute = ({ roleList, children }) => {
     
-    if (!isAuthenticated) {
-        return loginWithRedirect();
+    const { userData } = useUser();
+    if (roleList.includes(userData.rol)) {
+        return children;
     }
-    
-    return <>{children}</>;
-
+    return <div flex>
+        <Navbar />
+        <div className='flex flex-col justify-center items-center py-10'>
+            <span>No esta autorizado para ingresar, por favor inicie sección como administrador.</span> 
+        </div>
+    </div>;
 };
 
 /*  return isAuthenticated ? (<>{children}</>

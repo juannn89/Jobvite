@@ -1,15 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 const SidebarUsuarios = () => {
-    const { logout } = useAuth0();
 
-    const cerrarSesion = () => {
-        logout({ returnTo: 'http://localhost:3000/inicio' });
-        localStorage.setItem('token', null);
-    };
     return (
         <div>
         {<nav className="menu-nav">
@@ -19,7 +14,7 @@ const SidebarUsuarios = () => {
                 </button>
             </ul>
         </nav>}
-            <button onClick={() => cerrarSesion()}>Cerrar Sesión</button>
+            
         </div>
     )
 }
