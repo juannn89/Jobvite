@@ -78,6 +78,33 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
     .catch(errorCallback);
 };
 
+export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
+  const options = {
+    method: 'GET',
+    url: `http://localhost:5000/usuarios/self`,
+    headers: {
+      Authorization: getToken(), 
+    }
+  };
+  await axios
+    .request(options)
+    .then(successCallback)
+    .catch(errorCallback);
+};
+
+//Patch
+export const editarUsuario = async (id, data, successCallback, errorCallback) => {
+  const options = {
+    method: 'PATCH',
+    url: `http://localhost:5000/usuarios/${id}/`,
+    headers: { 'Content-Type': 'application/json', Authorization: getToken() },
+    data,
+  };
+  await axios
+    .request(options)
+    .then(successCallback)
+    .catch(errorCallback);
+};
 
 
 //P E S T A Ñ A   D E    V E N T A S 

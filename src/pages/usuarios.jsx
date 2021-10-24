@@ -1,4 +1,80 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react';
+import { obtenerUsuarios } from 'utils/api';
+import Navbar from 'components/Navbar';
+import { nanoid } from 'nanoid';
+import { editarUsuario } from 'utils/api';
+
+
+const Usuarios = () => {
+    const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            await obtenerUsuarios((response) => {
+                console.log('usuarios', response.data);
+                setUsuarios(response.data);
+            },
+                (err) => {
+                    console.log(err);
+                });
+        };
+        fetchUsuarios();
+    }, []);
+    return (
+        <div>
+            <Navbar />
+            admin usuarios
+
+            <table className='tabla'>
+                <tbody>
+                    {usuarios.map(user => {
+                        return (
+                            <tr key={nanoid()}>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>
+                                    <RolesUsuario user={user} />
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+const RolesUsuario = ({ user }) => {
+    const [rol, setRol] = useState(user.rol);
+    useEffect(() => {
+        const editUsuario = async () => {
+            await editarUsuario(user._id, { rol }, (response) => {
+                console.log(response);
+            },
+                (err) => { 
+                    console.err(err);
+                });
+        };
+        if (user.rol !== rol); {
+            editUsuario();
+        } 
+    }, [rol, user]);
+    return (
+        <select value={rol} onChange={(e)=>setRol(e.target.value)}>
+            <option value="admin">Admin</option>
+            <option value="vendedor">Vendedor</option>
+            <option value="inactivo">Inactivo</option>
+        </select>
+    );
+};
+
+export default Usuarios;
+
+
+
+
+
+/* import React, {useEffect, useState} from 'react'
 import Navbar from 'components/Navbar';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -175,3 +251,4 @@ const FormularioCreacionUsuarios = ()=>{
 };
 
 export default Usuarios;
+ */

@@ -88,7 +88,7 @@ const Ventas = () => {
                         <select name="vendedor" className='flex w-full p-2' defaultValue='' required>
                             <option disabled value=''>Seleccione un vendedor</option>
                             {vendedores.map((el) => {
-                                return <option key={nanoid()} value={el._id}>{`${el.nombre} ${el.apellido}`}</option>;
+                                return <option key={nanoid()} value={el._id}>{`${el.name}`}</option>;
                             })}
                         </select>
                     </label>

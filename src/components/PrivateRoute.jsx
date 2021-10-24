@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import { obtenerDatosUsuario } from 'utils/api';
 
 const PrivateRoute = ({ children }) => {
     const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0();
@@ -12,6 +13,13 @@ const PrivateRoute = ({ children }) => {
                 audience: `api-auth-jobvite`,
             });
             localStorage.setItem('token', accessToken);
+            await obtenerDatosUsuario(
+                (response) => {
+                    console.log("response", response);
+                },
+                (err) => {
+                    console.log('err', err); 
+                });
         };
         if (isAuthenticated) {
             fetchAuth0Token();
