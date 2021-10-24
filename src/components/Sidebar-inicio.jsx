@@ -7,7 +7,7 @@ const SidebarUsuarios = () => {
     const { logout } = useAuth0();
 
     const cerrarSesion = () => {
-        logout({ returnTo: window.location.origin });
+        logout({ returnTo: 'http://localhost:3000/inicio' });
         localStorage.setItem('token', null);
     };
     return (

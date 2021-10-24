@@ -20,7 +20,7 @@ function App() {
     <Auth0Provider
       domain="jobvite.us.auth0.com"
       clientId="B0d49EzpBQ49WiGPZD1ppSMemSPxNYbB"
-      redirectUri={window.location.origin}
+      redirectUri='http://localhost:3000/inicio'
       audience='api-auth-jobvite'
     >
     <div>
