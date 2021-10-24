@@ -1,16 +1,26 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const SidebarUsuarios = () => {
+    const { logout } = useAuth0();
+
+    const cerrarSesion = () => {
+        logout({ returnTo: window.location.origin });
+        localStorage.setItem('token', null);
+    };
     return (
-        <nav className="menu-nav">
+        <div>
+        {<nav className="menu-nav">
             <ul className="menu-contenedor">
-                <li className="menu-item">
+                    <button className="menu-item">
                     <Link to ="/" className="menu-link">cerrar sesión</Link>
-                </li>
+                </button>
             </ul>
-        </nav>  
+        </nav>}
+            <button onClick={() => cerrarSesion()}>Cerrar Sesión</button>
+        </div>
     )
 }
 

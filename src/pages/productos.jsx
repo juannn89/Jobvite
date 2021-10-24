@@ -5,24 +5,31 @@ import { nanoid } from 'nanoid';
 import { obtenerProductos, crearProducto, editarProducto, borrarProducto } from 'utils/api';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from 'components/Navbar';
+import ReactLoading from 'react-loading';
 
 const Producto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [productos, setProductos] = useState([]);
     const [textoBoton, setTextoBoton] = useState('Crear Nuevo Producto');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log('consulta', ejecutarConsulta);
-        if (ejecutarConsulta) {
-            obtenerProductos(
+        const fetchProductos = async () => {
+            setLoading(true);
+            await obtenerProductos(
                 (response) => {
                     setProductos(response.data);
+                    setEjecutarConsulta(false);
+                    setLoading(false);
                 },
                 (error) => {
                     console.error(error);
+                    setLoading(false);
                 });
-            setEjecutarConsulta(false);
+        }
+        if (ejecutarConsulta) {
+            fetchProductos();
         }
     }, [ejecutarConsulta]);
 
@@ -61,7 +68,9 @@ const Producto = () => {
                 {mostrarTabla ? (
                     <TablaProductos
                         listaProductos={productos}
-                        setEjecutarConsulta={setEjecutarConsulta} />
+                        setEjecutarConsulta={setEjecutarConsulta}
+                        loading={loading}
+                    />
                 ) : (
                     <FormularioCreacionProductos
                         setMostrarTabla={setMostrarTabla}
@@ -156,14 +165,14 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
     });
 
     const actualizarProducto = async () => {
-        console.log(infoNuevoProducto);
         //enviar informacion al backend
-        await editarProducto(productos._id, {
-            codigo: infoNuevoProducto.codigo, nombre: infoNuevoProducto.nombre, valor: infoNuevoProducto.valor, estado: infoNuevoProducto.estado
-        },
+        await editarProducto(productos._id,
+            {
+            codigo: infoNuevoProducto.codigo, nombre: infoNuevoProducto.nombre, valor: infoNuevoProducto.valor, estado: infoNuevoProducto.estado,
+            },
             (response) => {
                 console.log(response.data);
-                toast.success("Producto modificado con exito");
+                toast.success("Producto modificado con éxito");
                 setEdit(false);
                 setEjecutarConsulta(true);
             },
@@ -224,14 +233,17 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
 }
 
 //Pagina para mostrar productos
-const TablaProductos = ({listaProductos,setEjecutarConsulta}) => {
+const TablaProductos = ({loading, listaProductos,setEjecutarConsulta}) => {
     useEffect(()=>{
         console.log('este es el listado de productos en el componente tabla',listaProductos);
     },[listaProductos]);
     return(   
         <div className='flex flex-col items-center justify-center'>
             <h2 className='text-2xl font-extrabold mb-10'>Todos los productos </h2>
-            <table className='tabla'>
+            {loading ? (
+                <ReactLoading type='cylon' color='#222333' height={660} width={700} />
+            ):(
+                <table className='tabla'>
                 <thead>
                     <tr>
                      <th>Codigo</th>
@@ -247,7 +259,9 @@ const TablaProductos = ({listaProductos,setEjecutarConsulta}) => {
                         })
                     }
                 </tbody>
-            </table>
+            </table>   
+            )}
+            
         </div> 
         )
 }

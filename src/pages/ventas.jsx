@@ -10,7 +10,7 @@ const Ventas = () => {
     const form = useRef(null);
     const [vendedores, setvendedores] = useState([]);
     const [productos, setProductos] = useState([]);
-    const [productosSelect, setProductosSelect] = useState([]);
+    const [productosTabla, setProductosTabla] = useState([]);
 
     useEffect(() => {
         const obtenerVendedores = async () => {
@@ -36,83 +36,145 @@ const Ventas = () => {
         definirProductos();
         obtenerVendedores();
     }, []);
-    
-    useEffect(() => {
-        console.log('productos seleccionados', productosSelect);
-    }, [productosSelect]);
-
-    const agregrarProducto = () => {
-        setProductosSelect([...productosSelect, DropDownProductos]);
-    }
 
     const submitForm = async (e) => {
         e.preventDefault(); //para que el form pida que datos faltan
         const fd = new FormData(form.current);
-        const nuevaVenta = {};
+
+        const formData = {};
         fd.forEach((value, key) => {
-            nuevaVenta[key] = value;
+            formData[key] = value;
         });
-    
-    const infoConsolidado = {
-        valor: nuevaVenta.valor,
-        vendedor: vendedores.filter((v) => v._id === nuevaVenta.vendedor)[0],
-        producto: productos.filter((v) => v._id === nuevaVenta.producto)[0],
+
+        const listaProductos = Object.keys(formData).map((k) => {
+            if (k.includes('producto')) {
+                return productosTabla.filter((v) => v._id === formData[k])[0];
+            }
+            return null;
+        }).filter((v) => v);
+
+        Object.keys(formData).forEach((k) => {
+            if (k.includes('cantidad')) {
+                const indice = parseInt(k.split('_')[1]);
+                listaProductos[indice]['cantidad'] = formData[k];
+            }
+        });
+
+        const datosVenta = {
+            vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
+            valorT: formData.valorT,
+            productos: listaProductos,
         };
-        await crearVenta(infoConsolidado,
+
+        console.log(listaProductos);
+
+        await crearVenta(datosVenta,
             (response) => {
                 console.log(response);
-             },
+            },
             (error) => {
-                console.error(error);
+                console.error((error));
             }
         );
     };
     return (
-        <div className='h-full min-h-screen bg-blue-50 w-full flex-col'>
+        <div className='h-full w-full bg-blue-50 items-center justify-center'>
             <Navbar />
-            <h2 className=' flex flex-col items-center text-3xl font-extrabold text-gray-900 m-6 mb-10'>Pagina de administracion de ventas</h2>
-            <form ref={form} onSubmit={submitForm} className='min-h-screen flex flex-col items-center'>
-                <label className='flex flex-col my-3'>
-                    <span className='font-bold'>Vendedor</span>
-                    <select name="vendedor" className='p-2' defaultValue={-1}>
-                        <option disabled value={-1}>Seleccione un vendedor</option>
-                        {vendedores.map((el) => {
-                            return <option key={nanoid()} value ={el._id}>{`${el.nombre} ${el.apellido}`}</option>;
-                        })}
-                    </select>
-                </label>
-                <div className='flex flex-col'>
-                    <span>Selección de productos</span>
-                    <button onClick={() => agregrarProducto()} className='h-10 self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2'>Agregar otro producto</button>
-                </div>
-                {
-                    productosSelect.map((V) => {
-                        return <V productos={productos} />;
-                    })
-                }
-                <label className='flex flex-col my-3'>
-                    <span className='font-bold'>Valor total venta</span>
-                    <input className='bg-gray-150 border-gray-600 p-2' required type="number" name='valor'/>
-                </label>
-                <button className='h-10 self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2' type='submit'>Registrar Venta</button>
-            </form>
+            <div className='flex flex-col bg-blue-50 items-center justify-center'>
+                <h2 className='text-3xl font-extrabold text-gray-900 m-6 mb-10'>Pagina de administracion de ventas</h2>
+                <form ref={form} onSubmit={submitForm} className='flex flex-col'>
+                    <label className='flex flex-col justify-center items-center my-3' htmlFor='vendedor'>
+                        <span className='flex flex-col font-bold'>Vendedor</span>
+                        <select name="vendedor" className='flex w-full p-2' defaultValue='' required>
+                            <option disabled value=''>Seleccione un vendedor</option>
+                            {vendedores.map((el) => {
+                                return <option key={nanoid()} value={el._id}>{`${el.nombre} ${el.apellido}`}</option>;
+                            })}
+                        </select>
+                    </label>
+                    <TablaProductos productos={productos} setProductos={setProductos} setProductosTabla={setProductosTabla} />
+
+                    <label className='flex w-full items-center justify-center flex-col my-3'>
+                        <span className='font-bold'>Valor total venta</span>
+                        <input className='flex w-full bg-gray-150 border-gray-600 p-2' required type="number" name='valorT' />
+                    </label>
+                    <button className='flex w-full items-center justify-center self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2' type='submit'>Registrar Venta</button>
+                </form>
+            </div>
         </div>
     );
 };
 
-const DropDownProductos = ({ productos }) => {
+const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
+    const [productoAAgregar, setProductoAAgregar] = useState({});
+    const [filasTabla, setFilasTabla] = useState([]);
+
+    useEffect(() => {
+        console.log(productoAAgregar);
+    }, [productoAAgregar]);
+
+    useEffect(() => {
+        console.log('filasTabla', filasTabla);
+        setProductosTabla(filasTabla);
+    }, [filasTabla, setProductosTabla]);
+
+    const agregrarProducto = () => {
+        setFilasTabla([...filasTabla, productoAAgregar]);
+        setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
+        setProductoAAgregar({});
+    };
+
+    const eliminarProducto = (productoAEliminar) => {
+        setFilasTabla(filasTabla.filter(v => v._id !== productoAEliminar._id));
+        setProductos([...productos, productoAEliminar]);
+    };
+
     return (
-        <label className='flex flex-col'>
-            <span className='font-bold'>Producto</span>
-            <select name="producto" className='p-2' defaultValue={-1}>
-                <option disabled value={-1}>Seleccione un producto</option>
-                {productos.map((el) => {
-                    return <option key={nanoid()} value={el._id}> {`${el.nombre} ${el.codigo}`}</option>;
-                })}
-            </select>
-        </label>
+        <div>
+            <div className='flex items-center justify-center'>
+                <label className='flex flex-col items-center justify-center' htmlFor='producto'>
+                    <select className='p-2' name='producto' value={productoAAgregar._id ?? ''} onChange={(e) => setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
+                        <option disabled value=''>Seleccione un producto</option>
+                        {productos.map((el) => {
+                            return <option key={nanoid()} value={el._id}> {`${el.nombre} ${el.codigo}`}</option>;
+                        })}
+                    </select>
+                </label>
+                <button onClick={() => agregrarProducto()} className='w-full bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white text my-2 ml-4'>Agregar producto</button>
+            </div>
+            <table className='tabla'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Valor</th>
+                        <th>Cantidad</th>
+                        <th>Eliminar</th>
+                        <th className='hidden'>Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filasTabla.map((el, index) => {
+                        return (
+                            <tr key={nanoid()}>
+                                <td>{el._id}</td>
+                                <td>{el.codigo}</td>
+                                <td>{el.nombre}</td>
+                                <td>{el.valor}</td>
+                                <td><label htmlFor={`cantidad_${index}`}>
+                                    <input type="number" name={`cantidad_${index}`} />
+                                </label></td>
+                                <td className='text-center'><i onClick={() => eliminarProducto(el)} className='fas fa-minus text-red-500 cursor-pointer' /></td>
+                                <input hidden defaultValue={el._id} name={`producto_${index}`} />
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
-};
+}
     
 /* const ventasBackend  =[
     {
@@ -190,14 +252,14 @@ const FormularioCreacionVentas=({setMostrarTabla, listaVentas, setVentas})=>{
             e.preventDefault(); //para que el form pida que datos faltan
             const fd = new FormData(form.current);
         
-            const nuevaVenta = {};
+            const formData = {};
             fd.forEach((value, key) => {
-                nuevaVenta[key] = value;
+                formData[key] = value;
             });
-            console.log(nuevaVenta)
+            console.log(formData)
             setMostrarTabla(true);   //true: dirige hacia la tabla al agregar un product, false: no mueve
             toast.success("Producto agregado con exito");
-            setVentas([...listaVentas,nuevaVenta]);
+            setVentas([...listaVentas,formData]);
         };
         return(
             <div className='flex flex-col items-center justify-center'>

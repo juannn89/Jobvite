@@ -1,8 +1,10 @@
 import {Link} from 'react-router-dom'
 import gmailLogo from 'img/gmail.png'
+import { useAuth0 } from "@auth0/auth0-react";
 
-
-const Login=()=>{
+const Login = () => {
+    const { loginWithRedirect } = useAuth0();
+    
     return (
         <div className="container">
                 <section className="form-login">
@@ -10,11 +12,11 @@ const Login=()=>{
                     <input className="controls" type="text" name="usuario" value="" placeholder="Usuario"/>
                     <input className="controls" type="password" name="contrasena" value="" placeholder="Contraseña"/>
                     <form action="">
-                        <Link to="/inicio" >
-                            <button type="button" className="buttons">
+                        
+                        <button onClick={() => loginWithRedirect()} className="buttons">
                                 Ingresar
                              </button>
-                        </Link>
+                        
                         <div className="contenedor-gmail">
                             <Link to="/inicio"><img src={gmailLogo} className="ingreso-gmail" alt="img gmail"/></Link>
                         </div>
