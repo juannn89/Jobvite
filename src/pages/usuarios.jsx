@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from 'react'
 import Navbar from 'components/Navbar';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios'
-import {nanoid} from 'nanoid'
+import React, {useEffect,useState, useRef} from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const usuariosBackend  =[
     {
         nombre:"Juan Cruz",
         tipodocumento:"Cédula de ciudadanía",
-        numerodocumento:15568415,
+        documento:15568415,
         correo:"prueba@react.com",
         telefono:3103259550,
         rol:"Vendedor",
@@ -66,6 +64,7 @@ const Usuarios = () => {
                         />
                 )}
             </div>
+            <ToastContainer position='bottom-center' autoClose={3000} />
         </div>
     )
 }
@@ -94,7 +93,7 @@ const TablaUsuarios = ({listaUsuarios,setMostrarTabla})=>{
                         <tr>
                             <td>{usuario.nombre}</td>
                             <td>{usuario.tipodocumento} </td>
-                            <td>{usuario.numerodocumento}</td>
+                            <td>{usuario.documento}</td>
                             <td>{usuario.correo}</td>
                             <td>{usuario.telefono}</td>
                             <td>{usuario.rol}</td>
@@ -112,16 +111,31 @@ const TablaUsuarios = ({listaUsuarios,setMostrarTabla})=>{
             </tbody>
         </table>
     </div> 
-    );
-};
+    )
+}
 
-const FormularioCreacionUsuarios = ()=>{
+const FormularioCreacionUsuarios = ({setMostrarTabla,listaUsuarios,setUsuarios})=>{
 
+    const form = useRef(null);
+        const submitForm = (e) => {
+            e.preventDefault(); 
+            const fd = new FormData(form.current);
+            
+            const nuevaUsuario = {};
+            fd.forEach((value, key) => {
+                nuevaUsuario[key] = value;
+            });
+            console.log(nuevaUsuario)
+            setMostrarTabla(true); 
+            toast.success("Usuario agregado con exito");
+            setUsuarios([...listaUsuarios,nuevaUsuario]);
+        };
+    
     return (
         <div className='flex flex-col items-center justify-center'>
         <h2 className='text-2xl font-extrabold text-gray-900 mb-7 '> Formulario de Registro de Usuarios</h2>
 
-        <form  className="flex flex-col">
+        <form  ref={form} onSubmit={submitForm} className="flex flex-col">
             <h3 className='text-lg font-extrabold text-gray-900 mb-7 '>Datos del Usuario</h3>
 
             <label className='flex flex-col font-bold' htmlFor='codigoProduto' >Nombre Completo 
@@ -169,9 +183,13 @@ const FormularioCreacionUsuarios = ()=>{
             <button type='submit' className='bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white '> Guardar </button>
 
         </form>  
-   
+        <ToastContainer
+                    position='top-right' 
+                    autoClose={2000} 
+                    hideProgressBar={true}
+                    />
         </div>  
-    );
-};
+    )
+}
 
 export default Usuarios;
