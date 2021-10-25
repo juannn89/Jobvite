@@ -46,6 +46,8 @@ const Ventas = () => {
             formData[key] = value;
         });
 
+        console.log('form data', formData);
+
         const listaProductos = Object.keys(formData).map((k) => {
             if (k.includes('producto')) {
                 return productosTabla.filter((v) => v._id === formData[k])[0];
@@ -53,12 +55,12 @@ const Ventas = () => {
             return null;
         }).filter((v) => v);
 
-        Object.keys(formData).forEach((k) => {
+        /* Object.keys(formData).forEach((k) => {
             if (k.includes('cantidad')) {
                 const indice = parseInt(k.split('_')[1]);
                 listaProductos[indice]['cantidad'] = formData[k];
             }
-        });
+        }); */
 
         const datosVenta = {
             vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
@@ -78,9 +80,8 @@ const Ventas = () => {
         );
     };
     return (
-        <div className='h-full w-full bg-blue-50 items-center justify-center'>
-            <Navbar />
-            <div className='flex flex-col bg-blue-50 items-center justify-center'>
+        <> <Navbar/> 
+            <div className='flex flex-col bg-blue-50 items-center justify-center overflow-y'>
                 <h2 className='text-3xl font-extrabold text-gray-900 m-6 mb-10'>Pagina de administracion de ventas</h2>
                 <form ref={form} onSubmit={submitForm} className='flex flex-col'>
                     <label className='flex flex-col justify-center items-center my-3' htmlFor='vendedor'>
@@ -92,16 +93,30 @@ const Ventas = () => {
                             })}
                         </select>
                     </label>
-                    <TablaProductos productos={productos} setProductos={setProductos} setProductosTabla={setProductosTabla} />
+
+                    <TablaProductos
+                        productos={productos}
+                        setProductos={setProductos}
+                        setProductosTabla={setProductosTabla}
+                    />
 
                     <label className='flex w-full items-center justify-center flex-col my-3'>
                         <span className='font-bold'>Valor total venta</span>
-                        <input className='flex w-full bg-gray-150 border-gray-600 p-2' required type="number" name='valorT' />
+                        <input
+                            className='flex w-full bg-gray-150 border-gray-600 p-2'
+                            type="number"
+                            name='valorT'
+                            required
+                        />
                     </label>
-                    <button className='flex w-full items-center justify-center self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2' type='submit'>Registrar Venta</button>
+                    <button
+                        className='flex w-full items-center justify-center self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2'
+                        type='submit'>
+                        Registrar Venta
+                    </button>
                 </form>
             </div>
-        </div>
+        </>
     );
 };
 
@@ -109,12 +124,11 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
 
-    useEffect(() => {
+    /* useEffect(() => {
         console.log(productoAAgregar);
-    }, [productoAAgregar]);
+    }, [productoAAgregar]); */
 
     useEffect(() => {
-        console.log('filasTabla', filasTabla);
         setProductosTabla(filasTabla);
     }, [filasTabla, setProductosTabla]);
 
@@ -129,18 +143,44 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
         setProductos([...productos, productoAEliminar]);
     };
 
+    const modificarProducto = (productos, cantidad) => {
+        setFilasTabla(
+            filasTabla.map((ft) => {
+                if (ft._id === productos._id) {
+                    ft.cantidad = cantidad;
+                    ft.total = productos.valor * cantidad;
+                }
+                return ft;
+            })
+        );
+    };
+
     return (
         <div>
             <div className='flex items-center justify-center'>
                 <label className='flex flex-col items-center justify-center' htmlFor='producto'>
-                    <select className='p-2' name='producto' value={productoAAgregar._id ?? ''} onChange={(e) => setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
+                    <select
+                        className='p-2'
+                        name='producto'
+                        value={productoAAgregar._id ?? ''}
+                        onChange={(e) => setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
                         <option disabled value=''>Seleccione un producto</option>
                         {productos.map((el) => {
-                            return <option key={nanoid()} value={el._id}> {`${el.nombre} ${el.codigo}`}</option>;
+                            return (
+                                <option
+                                    key={nanoid()}
+                                    value={el._id}>
+                                    {`${el.nombre} ${el.codigo}`}
+                                </option>
+                            );
                         })}
                     </select>
                 </label>
-                <button onClick={() => agregrarProducto()} className='w-full bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white text my-2 ml-4'>Agregar producto</button>
+                <button
+                    type='buton'
+                    onClick={() => agregrarProducto()}
+                    className='w-full bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white text my-2 ml-4'>Agregar producto
+                </button>
             </div>
             <table className='tabla'>
                 <thead>
@@ -148,8 +188,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
                         <th>ID</th>
                         <th>Codigo</th>
                         <th>Nombre</th>
-                        <th>Valor</th>
                         <th>Cantidad</th>
+                        <th>Valor Unitario</th>
+                        <th>Valor Total</th>
                         <th>Eliminar</th>
                         <th className='hidden'>Input</th>
                     </tr>
@@ -157,24 +198,58 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
                 <tbody>
                     {filasTabla.map((el, index) => {
                         return (
-                            <tr key={nanoid()}>
-                                <td>{el._id}</td>
-                                <td>{el.codigo}</td>
-                                <td>{el.nombre}</td>
-                                <td>{el.valor}</td>
-                                <td><label htmlFor={`cantidad_${index}`}>
-                                    <input type="number" name={`cantidad_${index}`} />
-                                </label></td>
-                                <td className='text-center'><i onClick={() => eliminarProducto(el)} className='fas fa-minus text-red-500 cursor-pointer' /></td>
-                                <input hidden defaultValue={el._id} name={`producto_${index}`} />
-                            </tr>
-                        )
+                            <FilaProducto
+                                key={el._id}
+                                prod={el}
+                                index={index}
+                                eliminarProducto={eliminarProducto}
+                                modificarProducto={modificarProducto}
+                            />
+                        );
                     })}
                 </tbody>
             </table>
         </div>
     );
-}
+};
+
+const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
+    const [producto, setProducto] = useState(prod);
+    useEffect(() => {
+        console.log('prod', producto);
+    }, [producto]);
+    return (
+        <tr>
+            <td>{producto._id}</td>
+            <td>{producto.codigo}</td>
+            <td>{producto.nombre}</td>
+            <td><label htmlFor={`cantidad_${index}`}>
+                <input
+                    type="number"
+                    name={`cantidad_${index}`}
+                    value={producto.cantidad}
+                    onChange={(e) => {
+                        modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
+                        setProducto({
+                            ...producto,
+                            cantidad: e.target.value === '' ? '0' : e.target.value,
+                            total:
+                                parseFloat(producto.valor) *
+                                parseFloat(e.target.value === '' ? '0' : e.target.value),
+                        });
+                    }}
+                />
+            </label>
+            </td>
+            <td>{producto.valor}</td>
+            <td>{parseFloat(producto.total ?? 0)}</td>
+            <td className='text-center'>
+                <i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
+            </td>
+            <input hidden defaultValue={producto._id} name={`producto_${index}`} />
+        </tr>
+    );
+};
     
 /* const ventasBackend  =[
     {

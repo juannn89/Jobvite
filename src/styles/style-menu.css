@@ -8,6 +8,9 @@ body {
 
 /* espacio para definir estilos de cabecera*/
 .cabecera {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     background-color: rgb(200, 150, 247);
 }
 .cabecera-contenedor {
