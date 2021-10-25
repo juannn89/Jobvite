@@ -135,8 +135,8 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
                                             
                 <label className='flex flex-col font-bold' htmlFor='estado' >Estado
                     <select name='estado' className='bg-gray-150 border-gray-600 p-2 rounded-lg m-2' defaultValue={1} required>
-                        <option value={1}>Disponible</option>
-                        <option value={2}>No Disponible</option>
+                        <option value='Disponible'>Disponible</option>
+                        <option value='No disponible'>No Disponible</option>
                     </select>
                 </label>
 
