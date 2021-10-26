@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from 'components/Navbar';
 import ReactLoading from 'react-loading';
 import PrivateComponent from 'components/PrivateComponent';
+import { Tooltip, Dialog } from '@material-ui/core';
 
 const Producto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -51,11 +52,11 @@ const Producto = () => {
     }, [mostrarTabla]);
 
     return (
-        <div className='h-full min-h-screen bg-blue-50 w-full flex-col'>
-            <Navbar />
-            <h2 className=' flex flex-col items-center text-3xl font-extrabold text-gray-900 m-6 mb-10'>Pagina de administracion de productos </h2>
-            
-            <div className='flex flex-col items-center '>
+        <><Navbar />
+        <div className='h-full bg-blue-50 w-full flex-col'>
+            <h2 className=' flex flex-col items-center text-3xl font-extrabold text-gray-900 p-6 mb-3'>Pagina de administracion de productos </h2>
+                <div className='flex flex-col items-center '>
+                <PrivateComponent roleList={['admin']}>
                 <button
                     onClick={() => {
                         setMostrarTabla(!mostrarTabla);
@@ -63,6 +64,7 @@ const Producto = () => {
                     className="text-white bg-indigo-500 p-3 rounded-full m-6 px-20 ">
                     {textoBoton}
                 </button>
+                </PrivateComponent>
             </div>
 
             <div className='flex h-full flex-col  justify-left '>
@@ -82,6 +84,7 @@ const Producto = () => {
             </div>
             <ToastContainer position='bottom-center' autoClose={3000} />
         </div>
+        </>
     );
 };
 
@@ -155,6 +158,73 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
     )
 };
 
+//Pagina para mostrar productos
+const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
+    const [busqueda, setBusqueda] = useState('');
+    const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+
+    useEffect(() => {
+        setProductosFiltrados(
+            listaProductos.filter((elemento) => {
+                return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+            })
+        );
+    }, [busqueda, listaProductos]);
+
+    return (
+        <div className='flex flex-col items-center justify-center'>
+            <input
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+                placeholder='Buscar'
+                className='border-2 border-gray-700 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500' />
+            
+            <div>
+                <h2 className='text-2xl font-extrabold mb-10'>Todos los productos </h2>
+                {loading ? (
+                    <ReactLoading type='cylon' color='#222333' height={660} width={700} />
+                ) : (
+                    <table className='tabla'>
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Nombre del producto</th>
+                                <th>Valor unitario </th>
+                                <th>Estado </th>
+                                <PrivateComponent roleList={['admin']}>
+                                    <th>Acciones </th>
+                                </PrivateComponent>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listaProductos.map((productos) => {
+                                return <FilaProductos
+                                    key={nanoid()}
+                                    productos={productos}
+                                    setEjecutarConsulta={setEjecutarConsulta} />;
+                            })
+                            }
+                        </tbody>
+                    </table>
+                )}
+            </div>
+            <div className='flex flex-col w-full m-2 md:hidden'>
+                {productosFiltrados.map((el) => {
+                    return (
+                        <div className='bg-gray-400 m-2 shadow-xl flex flex-col p-2 rounded-xl'>
+                            <span>{el.codigo}</span>
+                            <span>{el.nombre}</span>
+                            <span>{el.valor}</span>
+                            <span>{el.estado}</span>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+
 const FilaProductos = ({ productos, setEjecutarConsulta }) => {
     const [edit, setEdit]=useState(false);
     const [openDialog, setOpenDialog] = useState(false);
@@ -169,7 +239,10 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
         //enviar informacion al backend
         await editarProducto(productos._id,
             {
-            codigo: infoNuevoProducto.codigo, nombre: infoNuevoProducto.nombre, valor: infoNuevoProducto.valor, estado: infoNuevoProducto.estado,
+                codigo: infoNuevoProducto.codigo,
+                nombre: infoNuevoProducto.nombre,
+                valor: infoNuevoProducto.valor,
+                estado: infoNuevoProducto.estado,
             },
             (response) => {
                 console.log(response.data);
@@ -220,55 +293,40 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
             <td>
                 <div className='flex w-full justify-around'>
                     {edit?(
+                        <><Tooltip title='Confirmar Edición' arrow>
                         <i onClick={()=>actualizarProducto()} className='fas fa-check text green-700 hover:text-green-500' />
+                        </Tooltip>
+                        <Tooltip title='Cancelar edición' arrow>
+                        <i onClick={() => setEdit(!edit)} className='fas fa-ban text-yellow-700 hover:text-yellow-500' />
+                        </Tooltip></>
                         ):(
+                        <><Tooltip title='Editar producto' arrow>   
                         <i onClick={()=>setEdit(!edit)} className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500' />
+                        </Tooltip>
+                        <Tooltip title='Eliminar producto' arrow>       
+                        <i onClick={()=>setOpenDialog(true) } className='fas fa-trash text-red-700 hover:text-red-500' />
+                        </Tooltip></>
                         )}
-
-                    <i onClick={()=>eliminarProducto() } className='fas fa-trash text-red-700 hover:text-red-500' />
                 </div>
+                <Dialog open={openDialog}>
+                    <div className='p-8 flex flex-col'>
+                        <h1 className='text-gray-900 text-2xl font-bold'>
+                        ¿Está seguro de querer eliminar el vehículo?
+                        </h1>
+                        <div className='flex w-full items-center justify-center my-4'>
+                            <button onClick={() => eliminarProducto()} className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'>
+                                Sí
+                            </button>
+                            <button onClick={() => setOpenDialog(false)} className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md' >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </Dialog>
             </td>
             </PrivateComponent>
         </tr>
     )
-
-
-}
-
-//Pagina para mostrar productos
-const TablaProductos = ({loading, listaProductos,setEjecutarConsulta}) => {
-    useEffect(()=>{
-        console.log('este es el listado de productos en el componente tabla',listaProductos);
-    },[listaProductos]);
-    return(   
-        <div className='flex flex-col items-center justify-center'>
-            <h2 className='text-2xl font-extrabold mb-10'>Todos los productos </h2>
-            {loading ? (
-                <ReactLoading type='cylon' color='#222333' height={660} width={700} />
-            ):(
-                <table className='tabla'>
-                <thead>
-                    <tr>
-                     <th>Codigo</th>
-                        <th>Nombre del producto</th>
-                        <th>Valor unitario </th>
-                        <th>Estado </th>
-                        <PrivateComponent roleList = {['admin']}>
-                        <th>Acciones </th>
-                        </PrivateComponent>
-                    </tr> 
-                </thead>
-                <tbody>
-                    {listaProductos.map((productos)=>{
-                        return <FilaProductos key={nanoid()} productos={productos} setEjecutarConsulta={setEjecutarConsulta} />;
-                        })
-                    }
-                </tbody>
-            </table>   
-            )}
-            
-        </div> 
-        )
 }
 
 export default Producto;    

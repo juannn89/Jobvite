@@ -1,5 +1,4 @@
 
-import Login from 'pages/login';
 import Inicio from 'pages/inicio';
 import Ventas from 'pages/ventas';
 import Producto from 'pages/productos';
@@ -35,21 +34,27 @@ function App() {
         <Switch>
             
           <Route path='/ventas'>
+            <PrivateRoute roleList={[ 'admin', 'vendedor']}>
               <Ventas />
+            </PrivateRoute>
           </Route>
 
           <Route path='/productos'> 
-            <Producto />
+            <PrivateRoute roleList={[ 'admin', 'vendedor']}>
+              <Producto />
+            </PrivateRoute>
           </Route>
 
           <Route path='/usuarios'> 
-              <PrivateRoute roleList={[ 'admin', 'vendedor']}>
+            <PrivateRoute roleList={[ 'admin', 'vendedor']}>
               <Usuarios />
             </PrivateRoute>
           </Route>
           
-          <Route path='/'> 
+          <Route path='/'>
+            <PrivateRoute roleList={[ 'admin', 'vendedor', 'sin rol']}>
               <Inicio />
+            </PrivateRoute>
           </Route>
 
         </Switch>  

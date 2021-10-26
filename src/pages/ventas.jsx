@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid'
 import { obtenerUsuarios, obtenerProductos, crearVenta } from 'utils/api';
+import { Tooltip, Dialog } from '@material-ui/core';
 
 
 const Ventas = () => {
@@ -73,9 +74,27 @@ const Ventas = () => {
         await crearVenta(datosVenta,
             (response) => {
                 console.log(response);
+                toast.info('Venta registrada', {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             },
             (error) => {
                 console.error((error));
+                toast.info('Error en venta', {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         );
     };
@@ -100,7 +119,7 @@ const Ventas = () => {
                         setProductosTabla={setProductosTabla}
                     />
 
-                    <label className='flex w-full items-center justify-center flex-col my-3'>
+                    {/* <label className='flex w-full items-center justify-center flex-col my-3'>
                         <span className='font-bold'>Valor total venta</span>
                         <input
                             className='flex w-full bg-gray-150 border-gray-600 p-2'
@@ -108,7 +127,7 @@ const Ventas = () => {
                             name='valorT'
                             required
                         />
-                    </label>
+                    </label> */}
                     <button
                         className='flex w-full items-center justify-center self-center bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white my-2'
                         type='submit'>
@@ -123,6 +142,19 @@ const Ventas = () => {
 const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
+    const [SumTotal, setSumTotal] = useState(0);
+
+
+    useEffect(() => {
+        const handlesumar = () => {
+            const sumar = filasTabla.map((productos) => parseFloat(productos.total))
+                .reduce((previous, current) => {
+                    return previous + current;
+                }, 0);
+            setSumTotal(sumar);
+        };
+        handlesumar();
+    });
 
     /* useEffect(() => {
         console.log(productoAAgregar);
@@ -207,8 +239,31 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
                             />
                         );
                     })}
+                    {/* <tr>
+                        <td>Total Venta</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{SumTotal}</td>
+                        <td></td>
+                    </tr> */}
                 </tbody>
             </table>
+            <label className='flex w-full items-center justify-center flex-col my-3'>
+                <span className='font-bold'>Valor total venta</span>
+                <input
+                    className='flex text-center bg-gray-150 border-gray-600 p-2'
+                    name='valorT'
+                    value={SumTotal}
+                    required
+                />
+            </label>
+            <ToastContainer
+                position='top-center'
+                autoClose={2000}
+                hideProgressBar={true}
+            />
         </div>
     );
 };
@@ -225,6 +280,8 @@ const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
             <td>{producto.nombre}</td>
             <td><label htmlFor={`cantidad_${index}`}>
                 <input
+                    required
+                    min='1'
                     type="number"
                     name={`cantidad_${index}`}
                     value={producto.cantidad}
@@ -244,7 +301,9 @@ const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
             <td>{producto.valor}</td>
             <td>{parseFloat(producto.total ?? 0)}</td>
             <td className='text-center'>
-                <i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
+                <Tooltip title='Eliminar producto' arrow>
+                <i onClick={() => eliminarProducto(producto)} className='fas fa-trash text-red-500 cursor-pointer' />
+                </Tooltip>
             </td>
             <input hidden defaultValue={producto._id} name={`producto_${index}`} />
         </tr>
