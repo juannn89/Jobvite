@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+    color: #333333;
+}
+
+/* espacio para definir estilos de cabecera*/
+.cabecera {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: rgb(200, 150, 247);
+}
+.cabecera-contenedor {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+.cabecera-logo {
+    float: left;
+    height: 60px;
+}
+.cabecera-menu {
+    float: right;
+}
+.cabecera-menu-contenedor {
+    margin: 0px;
+}
+.cabecera-menu-item {
+    display:inline-block;
+    font-size: 15px;
+    padding-top: 10px;
+}
+.cabecera-menu-link { 
+    height: 40px;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-transform: uppercase;
+    line-height: 40px;
+    color: cornsilk;
+    text-decoration: none;
+    font-weight: 700;
+}
+.cabecera-menu-link:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
+/*espacio para definir estilos de menu*/
+.menu-nav {
+    background-color: rgb(200, 150, 247);
+    height: 100vh; 
+    width: 185px;
+    float: left;
+    display: flex; 
+    flex-direction: row;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+    margin-top: 1.5px;
+}
+.menu-contenedor {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    margin-top: 5px;
+}
+.menu-item {
+    padding-top: 4%;
+}
+.menu-link { 
+    font-size: 13px;
+    height: auto;
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    text-transform: uppercase;
+    color: cornsilk;
+    text-decoration: none;
+    font-weight: 700;
+}
+.menu-link:hover {
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+}
+.pie {
+    float: left;
+    width: 100%;
+}

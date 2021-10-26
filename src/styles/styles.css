@@ -1,0 +1,33 @@
+html, body{
+  display: flex;
+  flex-direction: column;
+  height:100vh;
+}
+#contenedor {
+  height:100%;
+  width:100%;
+  background-color: gray
+}
+#cabecera {
+  height:10%;
+  width:100%;
+  background-color: white
+}
+#menu {
+  float: left;
+  height: 100%;
+  width: 20%;
+  background-color:gainsboro
+}
+#contenido {
+  float: left;
+  height:80%;
+  width:80%;
+  background-color:gray
+}
+#pie {
+  height:100%;
+  width:100%;
+  clear: both;
+  background-color: white
+}

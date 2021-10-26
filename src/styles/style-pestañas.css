@@ -1,0 +1,68 @@
+.titulo{
+    color: rgb(8, 8, 8);
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.contenedor-formulario {
+    margin: 1.5px;
+    height: 100vh;
+    width: auto;
+    background-color: aliceblue;
+    display: flex;
+    flex-flow: column;
+}
+
+.formulario-sombra {
+    background-color: rgba(77, 77, 77, 0.192);
+    white-space: normal;
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+}
+
+.formulario{
+    margin-left: auto;
+    margin-right: auto;
+    display:inline-block;
+    margin: 10px;
+}
+
+.formulario-buscar{
+    display:grid;
+    grid-template-columns: 1fr 1fr ;
+    gap:10px;
+}
+
+.formulario-registrar{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:10px;
+}
+
+
+
+.contenedorInput1 { 
+    width: 280px;
+    height: 30px;
+}
+
+.botonBuscar {
+    float:right;
+    margin-left: 10px;
+}
+
+.botonBuscar2 {
+    margin:auto;
+    display: flex;  
+}
+
+.btn{
+    text-decoration: none;
+    color: rgb(10, 10, 10);
+    background: aliceblue;
+    padding: 4px;
+    border: rgb(105, 105, 105) 1px solid;
+    border-radius: 7%;
+}

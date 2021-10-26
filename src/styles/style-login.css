@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .container{
+    background-image: url(img/login.jpg);
+    padding-top: 1rem;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .form-login {
+    width: 400px;
+    height: 340px;
+    background: #8a898969;
+    margin: auto;
+    margin-top: 180px;
+    box-shadow: 7px 13px 37px rgb(83, 83, 83);
+    padding: 20px 30px;
+    border-top: 4px solid #a2d1f8;
+    color: white;
+  }
+  
+  .form-login h5 {
+    margin: 0;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+  }
+  
+  .controls {
+    width: 100%;
+    border: 1px solid #91d2ec;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold bolder;
+    color: rgb(200, 200, 201);
+  }
+  
+  .buttons {
+    width: 100%;
+    height: 40px;
+    background: #04506e;
+    border: none;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .buttons:hover {
+    background-color: rgba(11, 10, 85, 0.801);
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .form-login p{
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+  }
+  
+  .form-login a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .form-login a:hover {
+    text-decoration: underline;
+  }
+
+  .ingreso-gmail {
+    width: 100px;
+    padding: 5px;
+  }
+
+  .contenedor-gmail {
+    text-align: center;
+    background: #04506e;
+  }
+
+  .contenedor-gmail:hover {
+    background-color: rgba(11, 10, 85, 0.801);
+    width: 100%;
+    cursor: pointer;
+  }
