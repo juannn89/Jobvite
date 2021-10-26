@@ -6,7 +6,7 @@ const Inicio = () => {
     const { logout } = useAuth0();
 
     const cerrarSesion = () => {
-        logout({ returnTo: 'http://localhost:3000/' });
+        logout({ returnTo: 'https://protected-spire-21672.herokuapp.com/' });
         localStorage.setItem('token', null);
     };
 
