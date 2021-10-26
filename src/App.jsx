@@ -25,7 +25,7 @@ function App() {
     <Auth0Provider
       domain="jobvite.us.auth0.com"
       clientId="B0d49EzpBQ49WiGPZD1ppSMemSPxNYbB"
-      redirectUri='http://localhost:3000/'
+      redirectUri='https://protected-spire-21672.herokuapp.com/'
       audience='api-auth-jobvite'
     >
       <div>
